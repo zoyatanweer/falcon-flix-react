@@ -46,7 +46,8 @@ picture {
 :root {
   --primary-color: #f72585;
   --secondary-color: #ff4d6d;
-  --background-color: #f8f9fa;
+  --background-color: #1a202c;
+  --text-color: #f8f9fa;
   --light-theme-color: #000000;
   --navigation-container-shadow: #6c757d;
   --navigation-color: #212529;
@@ -63,12 +64,8 @@ picture {
 }
 
 body {
-  /* neog */
-  background-color: #1a202c;
-  /* bhushan */
-  /* background-color: #232323; */
-
-  color: var(--primary-color);
+  background-color: var(--background-color);
+  color: var(--text-color);
   font-family: "Roboto", sans-serif;
   margin: 0;
 }
