@@ -1,22 +1,18 @@
 .sidebar-ul {
-  color: white;
+  color: var(--text-color);
 
   margin: 0 1rem 1rem 3.9rem;
   padding: 0.8rem;
   text-align: left;
-
   width: 20rem;
 }
+
 .sidebar-ul:hover {
-  /* background-color: var(--primary-color); */
+  background-color: var(--primary-color);
   border-radius: 10px;
   cursor: pointer;
-  background-color: var(--primary-color);
-
-  /* padding: 5px; */
-  /* width: 20rem; */
-  /* font-weight: 600; */
 }
+
 .sidebar-item {
   display: flex;
   justify-items: center;
@@ -26,6 +22,7 @@
 .sidebar-icon {
   margin-right: 1rem;
 }
+
 .sidebar-name {
   font-size: 1.8rem;
 }

@@ -5,7 +5,6 @@ import App from "./App";
 // import { makeServer } from "./server";
 
 import reportWebVitals from "./reportWebVitals";
-// makeServer();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 // makeServer();

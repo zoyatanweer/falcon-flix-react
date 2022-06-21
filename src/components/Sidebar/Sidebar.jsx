@@ -12,7 +12,6 @@ import "./Sidebar.css";
 const Sidebar = () => {
   return (
     <>
-      {/* <h2>hello from sidebar</h2> */}
       <div className="sidebar-container">
         <ul className="sidebar-ul">
           <li className="sidebar-item">
@@ -44,7 +43,6 @@ const Sidebar = () => {
             <p className="sidebar-name">Liked Videos</p>
           </li>
         </ul>
-
         <ul className="sidebar-ul">
           <li className="sidebar-item">
             <HistoryIcon className="sidebar-icon" />
