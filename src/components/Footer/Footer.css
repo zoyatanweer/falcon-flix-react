@@ -10,32 +10,39 @@
   padding: 10rem;
   text-align: center;
 }
+
 .footer-title {
   font-weight: 400;
   margin-bottom: 2rem;
 }
+
 .footer-contact {
   font-weight: 400;
   text-align: center;
 }
-.single-item-footer {
-  display: inline-block;
-  justify-content: center;
-  font-size: 2.8rem;
-}
-.single-item-footer-title {
-  display: flex;
-  justify-content: center;
-}
-.footer-item:hover {
-  color: var(--primary-color);
-}
-ul li.footer-item {
-  color: var(--background-color);
-}
+
 .footer-copyright {
   margin-bottom: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.footer-item:hover {
+  color: var(--primary-color);
+}
+
+.single-item-footer {
+  display: inline-block;
+  justify-content: center;
+  font-size: 2.8rem;
+}
+
+.single-item-footer-title {
+  display: flex;
+  justify-content: center;
+}
+
+ul li.footer-item {
+  color: var(--background-color);
 }

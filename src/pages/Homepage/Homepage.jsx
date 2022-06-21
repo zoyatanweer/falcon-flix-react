@@ -54,21 +54,21 @@ const Homepage = () => {
             <div className="two-items">
               <div className="category-item item-left">
                 <img src={trailersPhoto} className="category-img"></img>
-                <span className="category-hover">TRAILERS</span>
+                <span className="category-title">TRAILERS</span>
               </div>
               <div className="category-item item-right">
                 <img src={bloopersPhoto} className="category-img"></img>
-                <span className="category-hover">BLOOPERS</span>
+                <span className="category-title">BLOOPERS</span>
               </div>
             </div>
             <div className="two-items">
               <div className="category-item item-left">
                 <img src={talkShowsPhoto} className="category-img"></img>
-                <span className="category-hover">TALK SHOWS</span>
+                <span className="category-title">TALK SHOWS</span>
               </div>
               <div className="category-item item-right">
                 <img src={interviewsPhoto} className="category-img"></img>
-                <span className="category-hover">INTERVIEWS</span>
+                <span className="category-title">INTERVIEWS</span>
               </div>
             </div>
           </div>

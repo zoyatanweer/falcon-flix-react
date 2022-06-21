@@ -1,6 +1,5 @@
 import React from "react";
 import "./Footer.css";
-// import { Link } from "react-router-dom";
 import {
   CopyrightIcon,
   GithubIcon,
@@ -8,7 +7,6 @@ import {
   TwitterIcon,
 } from "../../Assets/Svg/allsvg";
 
-// footer
 const Footer = () => {
   return (
     <footer className="footer">
