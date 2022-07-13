@@ -1,0 +1,79 @@
+.videos-container {
+  display: flex;
+  /* flex-direction: column; */
+  /* justify-content: center; */
+  /* align-items: center; */
+  /* display: grid;
+  grid-template-columns: repeat(3, 1fr); */
+  justify-content: center;
+  /* grid-auto-flow: column; */
+  flex-wrap: wrap;
+  /* height: 30rem;
+  width: 30rem; */
+}
+
+.video-card {
+  height: 30rem;
+  width: 30rem;
+  background-color: white;
+  color: black;
+
+  background-color: #495057;
+  color: white;
+
+  margin: 2rem 1rem;
+}
+.vid-thumbnail {
+  /* width: 50rem;
+  height: 50rem; */
+  object-fit: cover;
+  /* height: 10rem; */
+  /* width: 10rem; */
+}
+.vid-title {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  padding: 0 0.5rem;
+}
+.vid-details {
+  color: #adb5bd;
+  color: #ced4da;
+  display: flex;
+  justify-content: space-between;
+  /* justify-content: center; */
+  align-items: center;
+  padding: 0 0.5rem;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.vid-services {
+  width: 50%;
+  font-size: 2rem;
+  margin-left: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.creator {
+  color: #ced4da;
+  margin-left: 5px;
+}
+.title {
+  font-weight: 500;
+  font-size: 1.7rem;
+  margin-left: 5px;
+}
+.typography-h6 {
+  display: flex;
+  justify-content: space-between;
+  /* align-items: flex-start; */
+}
+
+/* video-services-icons */
+.liked-clicked:hover,
+.watchLater-clicked:hover {
+  fill: var(--text-color);
+  color: var(--text-color);
+  cursor: pointer;
+}

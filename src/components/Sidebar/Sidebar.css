@@ -1,24 +1,20 @@
-.sidebar-ul {
-  color: var(--text-color);
+.sidebar-item {
+  display: flex;
+  justify-items: center;
+  align-content: center;
 
   margin: 0 1rem 1rem 3.9rem;
+  margin: 0 1rem 1rem 1rem;
   padding: 0.8rem;
   text-align: left;
   width: 20rem;
 }
 
-.sidebar-ul:hover {
+.sidebar-item:hover {
   background-color: var(--primary-color);
   border-radius: 10px;
   cursor: pointer;
 }
-
-.sidebar-item {
-  display: flex;
-  justify-items: center;
-  align-content: center;
-}
-
 .sidebar-icon {
   margin-right: 1rem;
 }

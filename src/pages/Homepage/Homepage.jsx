@@ -1,10 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Header } from "../../components/Header/Header";
 import { Sidebar } from "../../components/Sidebar/Sidebar";
 import { HomepageVideo } from "./HomepageVideo";
-import { Footer } from "../../components/Footer/Footer";
 
-import { SearchIcon, UserIcon } from "../../Assets/Svg/allsvg";
 import {
   bloopersPhoto,
   interviewsPhoto,
@@ -17,28 +16,6 @@ import "./Homepage.css";
 const Homepage = () => {
   return (
     <div className="container">
-      {/* ----navigation starts---- */}
-      <nav className="navigation-container item-a">
-        <div className="nav-brand title-theme">
-          <a to="/">
-            Falcon <span className="title-theme-name">Flix</span>
-          </a>
-        </div>
-        <div className="searchbar">
-          <SearchIcon className="right-nav-img img-search"></SearchIcon>
-          <input
-            className="desktop-searchbar"
-            type="text"
-            placeholder="Search for videos"
-          />
-        </div>
-        <div className="user-profile">
-          <UserIcon />
-        </div>
-      </nav>
-      <div className="division"></div>
-      {/* ----navigation ends---- */}
-
       {/* ----page content starts---- */}
       <div className="main-page-content">
         <Sidebar className="item-c" />
@@ -75,8 +52,6 @@ const Homepage = () => {
         </div>
       </div>
       {/* ----page content ends---- */}
-
-      <Footer />
     </div>
   );
 };

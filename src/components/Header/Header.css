@@ -1,0 +1,10 @@
+.btn-primary {
+  background-color: var(--primary-color);
+  padding: 2px;
+  height: 40px;
+  width: 10rem;
+}
+.btn-primary:hover {
+  background-color: var(--text-color);
+  color: var(--primary-color);
+}
