@@ -143,8 +143,12 @@
 .main-content {
   background-color: #343a40;
   margin-left: 1rem;
-  padding: 2rem;
-  width: 75vw;
+  /* margin-left: 0; */
+  /* padding: 2rem; */
+  /* width: 75vw; */
+  margin-left: 0;
+  padding: 1rem;
+  width: 80vw;
 }
 
 .navigation-container {

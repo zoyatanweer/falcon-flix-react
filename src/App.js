@@ -1,11 +1,27 @@
 import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import { Header } from "./components/Header/Header";
 import { Homepage } from "./pages/Homepage/Homepage";
+import { Explore } from "./pages/Explore/Explore";
 import { Sidebar } from "./components/Sidebar/Sidebar";
+import { Footer } from "./components/Footer/Footer";
+import { Login } from "./pages/Login/Login";
+import { Signup } from "./pages/SignUp/SignUp";
 
 function App() {
   return (
     <div className="App">
-      <Homepage />
+      <Header />
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/explore" element={<Explore />} />
+        {/* <Route path="/playlist" element={<Playlist />} />
+        <Route path="/watchLater" element={<WatchLater />} /> */}
+        {/* <Route path="/explore" element={<Explore />} /> */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+      </Routes>
+      <Footer />
     </div>
   );
 }

@@ -1,0 +1,30 @@
+.filter-section {
+  display: flex;
+  justify-content: flex-start;
+  /* justify-content: space-between; */
+  /* margin-left: 2.4rem; */
+  margin-left: 1.3rem;
+  width: 100%;
+}
+
+.filter-section > span {
+  background-color: #343a40;
+  border-radius: 20px;
+  border: 1px solid white;
+  color: white;
+  margin: 0 10px 15px 0;
+  margin: 0 0 1rem 1rem;
+  margin: 5px 10px 0 5px;
+  padding: 0 15px;
+
+  /* display: inline-block; */
+}
+
+.span-all {
+  margin-left: 4rem;
+}
+.filter-section > span:hover {
+  background-color: var(--background-color);
+  cursor: pointer;
+  font-weight: 500;
+}

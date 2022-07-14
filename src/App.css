@@ -23,10 +23,10 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
-
+/* 
 .App-link {
   color: #61dafb;
-}
+} */
 
 @keyframes App-logo-spin {
   from {
@@ -35,4 +35,29 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* login-signup */
+.login-signup-page {
+  /* background-color: var(--login-signup-page); */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.img-form {
+  height: 50rem;
+  width: 50rem;
+  object-fit: cover;
+}
+.login-signup-form {
+  /* background-color: var(--form-bg-color); */
+  background-color: var(--explore-background);
+  border-radius: 10px;
+  width: 35%;
+  text-align: center;
+}
+.form-heading {
+  /* color: var(--navigation-color); */
+  color: var(--text-color);
+  font-size: 3rem;
 }

@@ -30,8 +30,8 @@ function HomeIcon(props) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="2em"
-      height="2em"
+      width="1.6em"
+      height="1.6em"
       viewBox="0 0 24 24"
       {...props}
     >
@@ -47,8 +47,8 @@ function ExploreIcon(props) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="2em"
-      height="2em"
+      width="1.6em"
+      height="1.6em"
       viewBox="0 0 24 24"
       {...props}
     >
@@ -64,8 +64,8 @@ function PlaylistPlayIcon(props) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="2em"
-      height="2em"
+      width="1.6em"
+      height="1.6em"
       viewBox="0 0 24 24"
       {...props}
     >
@@ -81,8 +81,8 @@ function WatchLaterIcon(props) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="2em"
-      height="2em"
+      width="1.6em"
+      height="1.6em"
       viewBox="0 0 24 24"
       {...props}
     >
@@ -98,8 +98,8 @@ function LikedIcon(props) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="2em"
-      height="2em"
+      width="1.6em"
+      height="1.6em"
       viewBox="0 0 24 24"
       {...props}
     >
@@ -115,8 +115,8 @@ function HistoryIcon(props) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      width="2em"
-      height="2em"
+      width="1.6em"
+      height="1.6em"
       viewBox="0 0 24 24"
       {...props}
     >
@@ -172,6 +172,68 @@ function TwitterIcon(props) {
   );
 }
 
+function OptionsIcon(props) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="1.7em"
+      height="1.7em"
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <path
+        fill="currentColor"
+        d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2s-2 .9-2 2s.9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2s2-.9 2-2s-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2s2-.9 2-2s-.9-2-2-2z"
+      ></path>
+    </svg>
+  );
+}
+
+function LikeIcon(props) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="1em"
+      height="1em"
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <path
+        fill="currentColor"
+        d="M21 12v-2h-9l1.34-5.34L9 9v10h9z"
+        opacity=".3"
+      ></path>
+      <path
+        fill="currentColor"
+        d="M9 21h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2c0-1.1-.9-2-2-2h-6.31l.95-4.57l.03-.32c0-.41-.17-.79-.44-1.06L14.17 1L7.58 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2zM9 9l4.34-4.34L12 10h9v2l-3 7H9V9zM1 9h4v12H1z"
+      ></path>
+    </svg>
+  );
+}
+
+// {/* <FontAwesomeIcon icon="fa-light fa-thumbs-up" />; */}
+
+function WatchLaterClickIcon(props) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="1em"
+      height="1em"
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <path
+        fill="currentColor"
+        d="M12 4c-4.41 0-8 3.59-8 8s3.59 8 8 8s8-3.59 8-8s-3.59-8-8-8zm4.2 12.2L11 13V7h1.5v5.2l4.5 2.7l-.8 1.3z"
+        opacity=".3"
+      ></path>
+      <path
+        fill="currentColor"
+        d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10s10-4.5 10-10S17.5 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8zm.5-13H11v6l5.2 3.2l.8-1.3l-4.5-2.7V7z"
+      ></path>
+    </svg>
+  );
+}
 export {
   CopyrightIcon,
   ExploreIcon,
@@ -180,9 +242,12 @@ export {
   HomeIcon,
   LinkedinIcon,
   LikedIcon,
+  OptionsIcon,
   PlaylistPlayIcon,
   SearchIcon,
   UserIcon,
   WatchLaterIcon,
   TwitterIcon,
+  LikeIcon,
+  WatchLaterClickIcon,
 };
