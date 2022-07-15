@@ -96,7 +96,7 @@ const VideoProvider = ({ children }) => {
   const removeLikes = async (_id) => {
     try {
       const response = await removeLikedVideos(_id);
-      videoDispatch({ type: "REMOVE_LIKED_VIDEOS", payload: response.likes });
+      videoDispatch({ type: "REMOVE_FROM_LIKED", payload: response.likes });
     } catch (error) {
       console.log(error);
     }

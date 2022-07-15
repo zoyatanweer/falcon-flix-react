@@ -3,6 +3,7 @@ import React from "react";
 import { useLikedVideos } from "../../context/LikedVideosContext";
 
 import {
+  LikedIconFilled,
   LikeIcon,
   OptionsIcon,
   PlaylistPlayIcon,
@@ -47,6 +48,11 @@ const VideoCard = () => {
             <LikeIcon
               className="liked-clicked"
               onClick={() => likeVideoToggleHandler(video)}
+              {...(videoState.liked.some((item) => item._id === video._id) ? (
+                <LikeIcon />
+              ) : (
+                <LikedIconFilled />
+              ))}
             />
             <WatchLaterClickIcon className="watchLater-clicked" />
             <PlaylistPlayIcon />
