@@ -1,20 +1,19 @@
 import React from "react";
 
-import { useLikedVideos } from "../../context/LikedVideosContext";
-
 import {
   LikedIconFilled,
   LikeIcon,
-  OptionsIcon,
   PlaylistPlayIcon,
   WatchLaterClickIcon,
 } from "../../Assets/Svg/allsvg";
 import { videos } from "../../backend/db/videos";
 import "./VideoCard.css";
 import { useVideo } from "../../context/VideoContext";
+import { removeWatchLaterVideos } from "../../api/videos";
 
 const VideoCard = () => {
-  const { videoState, removeLikes, getLikes } = useVideo();
+  const { videoState, removeLikes, getLikes, getWatchLater, removeWatchLater } =
+    useVideo();
   const { videos } = videoState;
 
   // const likeVideoToggleHandler = (video) => {
@@ -30,6 +29,12 @@ const VideoCard = () => {
     videoState.liked.some((item) => item._id === video._id)
       ? removeLikes(video._id)
       : getLikes(video);
+  };
+
+  const watchLaterToggleHandler = (video) => {
+    videoState.watchLater.some((item) => item._id === video._id)
+      ? removeWatchLater(video._id)
+      : getWatchLater(video);
   };
 
   return videos.map((video) => {
@@ -54,7 +59,10 @@ const VideoCard = () => {
                 <LikedIconFilled />
               ))}
             />
-            <WatchLaterClickIcon className="watchLater-clicked" />
+            <WatchLaterClickIcon
+              className="watchLater-clicked"
+              onClick={() => watchLaterToggleHandler(video)}
+            />
             <PlaylistPlayIcon />
           </div>
           <p className="date para-xsmall ">{dateUploaded}</p>

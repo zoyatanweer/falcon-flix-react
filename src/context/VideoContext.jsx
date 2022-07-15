@@ -12,6 +12,8 @@ import {
   getLikedVideos,
   postLikedVideos,
   removeLikedVideos,
+  removeWatchLaterVideos,
+  postWatchLaterVideos,
 } from "../api/videos";
 
 const VideoContext = createContext(null);
@@ -20,6 +22,7 @@ const initialState = {
   videos: [],
   categories: [],
   liked: [],
+  watchLater: [],
 };
 
 const VideoProvider = ({ children }) => {
@@ -33,7 +36,7 @@ const VideoProvider = ({ children }) => {
       case "SET_CATEGORIES":
         return {
           ...videoState,
-          categoriies: action.payload,
+          categories: action.payload,
         };
       case "ADD_TO_LIKED":
         return {
@@ -45,6 +48,16 @@ const VideoProvider = ({ children }) => {
         return {
           ...videoState,
           liked: action.payload,
+        };
+      case "ADD_TO_WATCHLATER":
+        return {
+          ...videoState,
+          watchLater: action.payload,
+        };
+      case "REMOVE_FROM_WATCHLATER":
+        return {
+          ...videoState,
+          watchLater: action.payload,
         };
     }
   };
@@ -84,6 +97,7 @@ const VideoProvider = ({ children }) => {
     allCategories();
   }, []);
 
+  // liked functionality
   const getLikes = async (video) => {
     try {
       const response = await postLikedVideos(video);
@@ -102,9 +116,41 @@ const VideoProvider = ({ children }) => {
     }
   };
 
+  // watchlater functionality
+  const getWatchLater = async (video) => {
+    try {
+      const response = await postWatchLaterVideos(video);
+      videoDispatch({
+        type: "ADD_TO_WATCHLATER",
+        payload: response.watchlater,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const removeWatchLater = async (_id) => {
+    try {
+      const response = await removeWatchLaterVideos(_id);
+      videoDispatch({
+        type: "REMOVE_FROM_WATCHLATER",
+        payload: response.watchlater,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <VideoContext.Provider
-      value={{ videoState, videoDispatch, getLikes, removeLikes }}
+      value={{
+        videoState,
+        videoDispatch,
+        getLikes,
+        removeLikes,
+        getWatchLater,
+        removeWatchLater,
+      }}
     >
       {children}
     </VideoContext.Provider>
