@@ -6,7 +6,6 @@
 }
 
 .filter-section > span {
-  /* background-color: var(--background-color); */
   background-color: #343a40;
   border-radius: 20px;
   border: 1px solid white;

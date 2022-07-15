@@ -3,15 +3,12 @@ import { Sidebar } from "../../components/Sidebar/Sidebar";
 import { videos } from "../../backend/db/videos";
 import { VideoCard } from "../../components/VideoCard/VideoCard";
 import { useVideo } from "../../context/VideoContext";
-// import { useAuth } from "../../context/authContext";
 
 import "./Explore.css";
 import "../../components/VideoCard/VideoCard.css";
 import { Categories } from "../../components/Categories/Categories";
 
 const Explore = () => {
-  // const { token } = useAuth();
-
   return (
     <>
       <div className="main-page-content">

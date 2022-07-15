@@ -39,7 +39,7 @@ const Sidebar = () => {
             <p className="sidebar-name">Watch Later</p>
           </li>
         </NavLink>
-        <NavLink to="/likedVideos">
+        <NavLink to="/liked">
           <li className="sidebar-item">
             <LikedIcon className="sidebar-icon" />
             <p className="sidebar-name">Liked Videos</p>

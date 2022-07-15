@@ -1,4 +1,3 @@
-// import { Action } from "history";
 import {
   createContext,
   useContext,
@@ -7,24 +6,26 @@ import {
   useState,
 } from "react";
 
-import { getVideos, getCategories } from "../api/videos";
+import {
+  getVideos,
+  getCategories,
+  getLikedVideos,
+  postLikedVideos,
+  removeLikedVideos,
+} from "../api/videos";
 
 const VideoContext = createContext(null);
 
 const initialState = {
   videos: [],
   categories: [],
+  liked: [],
 };
 
 const VideoProvider = ({ children }) => {
-  const [videoState, videoDispatch] = useReducer(
-    videoReducerFunc,
-    initialState
-  );
-
   const videoReducerFunc = (videoState, action) => {
     switch (action.type) {
-      case "SET_DATA":
+      case "SET_VIDEOS":
         return {
           ...videoState,
           videos: action.payload,
@@ -34,8 +35,24 @@ const VideoProvider = ({ children }) => {
           ...videoState,
           categoriies: action.payload,
         };
+      case "ADD_TO_LIKED":
+        return {
+          ...videoState,
+          liked: action.payload,
+        };
+
+      case "REMOVE_FROM_LIKED":
+        return {
+          ...videoState,
+          liked: action.payload,
+        };
     }
   };
+
+  const [videoState, videoDispatch] = useReducer(
+    videoReducerFunc,
+    initialState
+  );
 
   useEffect(() => {
     const allVideos = async () => {
@@ -67,14 +84,35 @@ const VideoProvider = ({ children }) => {
     allCategories();
   }, []);
 
+  const getLikes = async (video) => {
+    try {
+      const response = await postLikedVideos(video);
+      videoDispatch({ type: "ADD_TO_LIKED", payload: response.likes });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const removeLikes = async (_id) => {
+    try {
+      const response = await removeLikedVideos(_id);
+      videoDispatch({ type: "REMOVE_LIKED_VIDEOS", payload: response.likes });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
-    <VideoContext.Provider value={{ videoState, videoDispatch }}>
+    <VideoContext.Provider
+      value={{ videoState, videoDispatch, getLikes, removeLikes }}
+    >
       {children}
     </VideoContext.Provider>
   );
 };
 
 const useVideo = () => useContext(VideoContext);
+export { useVideo, VideoProvider };
 
 // // reducer function
 // const videoReducerFunc = (videoState, action) => {
@@ -121,5 +159,3 @@ const useVideo = () => useContext(VideoContext);
 //   };
 //   allCategories();
 // }, []);
-
-export { useVideo, VideoProvider };
