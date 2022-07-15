@@ -6,6 +6,8 @@ import App from "./App";
 import { makeServer } from "./server";
 
 import reportWebVitals from "./reportWebVitals";
+import { LikedVideosProvider } from "./context/LikedVideosContext";
+import { VideoProvider } from "./context/VideoContext";
 // import { AuthProvider } from "./context/authContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
@@ -17,7 +19,11 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       {/* <AuthProvider> */}
-      <App />
+      {/* <LikedVideosProvider> */}
+      <VideoProvider>
+        <App />
+      </VideoProvider>
+      {/* </LikedVideosProvider> */}
       {/* </AuthProvider> */}
     </BrowserRouter>
   </React.StrictMode>
