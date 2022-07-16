@@ -1,18 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Login.css";
-// import loginSignup from "../../Assets/Images/loginSignup.png";
 import { Link } from "react-router-dom";
-// import { useTheme } from "../../Context/Theme/Theme-Context";
+import { useAuth } from "../../context/authContext";
 
 const Login = () => {
-  //   const { theme } = useTheme();
+  const { loginHandler, signupHandler, logoutHandler, token, user } = useAuth();
+  const [loginCredentials, setLoginCredentials] = useState({
+    email: "",
+    password: "",
+  });
+  console.log(loginCredentials);
 
   return (
-    // <div className={theme === "dark" ? "dark-theme" : "light-theme"}>
     <section className="login-signup-page">
-      {/* <div className="login-img-section">
-        <img className="img-form login-img" src={loginSignup} />
-      </div> */}
       <div className="login-signup-form login-form">
         <h1 className="form-heading margin-bottom-2rem">LOGIN</h1>
         <form>
@@ -49,7 +49,15 @@ const Login = () => {
             </Link>
           </div>
           <div className="buttons-block">
-            <button className="login login-test">
+            <button
+              className="login login-test"
+              onClick={() =>
+                setLoginCredentials({
+                  email: "adarshbalika@gmail.com",
+                  password: "adarshBalika123",
+                })
+              }
+            >
               Login using test credentials
             </button>
             <button className="login login-btn">LOGIN</button>
@@ -63,7 +71,6 @@ const Login = () => {
         </p>
       </div>
     </section>
-    // </div>
   );
 };
 export { Login };
