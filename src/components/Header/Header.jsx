@@ -2,8 +2,10 @@ import React from "react";
 import { SearchIcon, UserIcon } from "../../Assets/Svg/allsvg";
 import { NavLink } from "react-router-dom";
 import "./Header.css";
+import { useAuth } from "../../context/authContext";
 
 const Header = () => {
+  const { token, logoutHandler } = useAuth();
   return (
     <>
       {/* ----navigation starts---- */}
@@ -23,9 +25,23 @@ const Header = () => {
         </div>
         <div className="user-profile">
           {/* <UserIcon /> */}
-          <NavLink to="/login">
+          {token ? (
+            <NavLink to="/">
+              <button
+                onClick={logoutHandler}
+                className=" btn box-shadow btn-primary"
+              >
+                Logout
+              </button>
+            </NavLink>
+          ) : (
+            <NavLink to="/login">
+              <button class="btn box-shadow btn-primary">Login</button>
+            </NavLink>
+          )}
+          {/* <NavLink to="/login">
             <button class="btn box-shadow btn-primary">Login</button>
-          </NavLink>
+          </NavLink> */}
         </div>
       </nav>
       <div className="division"></div>

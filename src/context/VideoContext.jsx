@@ -5,6 +5,7 @@ import {
   useReducer,
   useState,
 } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
 
 import {
   getVideos,
@@ -26,6 +27,8 @@ const initialState = {
 };
 
 const VideoProvider = ({ children }) => {
+  const navigate = useNavigate();
+
   const videoReducerFunc = (videoState, action) => {
     switch (action.type) {
       case "SET_VIDEOS":
@@ -98,18 +101,22 @@ const VideoProvider = ({ children }) => {
   }, []);
 
   // liked functionality
-  const getLikes = async (video) => {
-    try {
-      const response = await postLikedVideos(video);
-      videoDispatch({ type: "ADD_TO_LIKED", payload: response.likes });
-    } catch (error) {
-      console.log(error);
+  const getLikes = async (token, video) => {
+    if (token) {
+      try {
+        const response = await postLikedVideos(token, video);
+        videoDispatch({ type: "ADD_TO_LIKED", payload: response.likes });
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      navigate("/login");
     }
   };
 
-  const removeLikes = async (_id) => {
+  const removeLikes = async (_id, token) => {
     try {
-      const response = await removeLikedVideos(_id);
+      const response = await removeLikedVideos(_id, token);
       videoDispatch({ type: "REMOVE_FROM_LIKED", payload: response.likes });
     } catch (error) {
       console.log(error);
@@ -117,21 +124,25 @@ const VideoProvider = ({ children }) => {
   };
 
   // watchlater functionality
-  const getWatchLater = async (video) => {
-    try {
-      const response = await postWatchLaterVideos(video);
-      videoDispatch({
-        type: "ADD_TO_WATCHLATER",
-        payload: response.watchlater,
-      });
-    } catch (error) {
-      console.log(error);
+  const getWatchLater = async (video, token) => {
+    if (token) {
+      try {
+        const response = await postWatchLaterVideos(video, token);
+        videoDispatch({
+          type: "ADD_TO_WATCHLATER",
+          payload: response.watchlater,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      navigate("/login");
     }
   };
 
-  const removeWatchLater = async (_id) => {
+  const removeWatchLater = async (_id, token) => {
     try {
-      const response = await removeWatchLaterVideos(_id);
+      const response = await removeWatchLaterVideos(_id, token);
       videoDispatch({
         type: "REMOVE_FROM_WATCHLATER",
         payload: response.watchlater,

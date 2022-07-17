@@ -1,36 +1,66 @@
 import React, { useState } from "react";
-import "./Login.css";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/authContext";
+import "./Login.css";
 
 const Login = () => {
-  const { loginHandler, signupHandler, logoutHandler, token, user } = useAuth();
-  const [loginCredentials, setLoginCredentials] = useState({
-    email: "",
-    password: "",
-  });
-  console.log(loginCredentials);
+  // const { loginHandler } = useAuth();
+  const { loginHandler, loginCredentials, setLoginCredentials } = useAuth();
+  // const [loginCredentials, setLoginCredentials] = useState({
+  //   email: "",
+  //   password: "",
+  // });
+
+  const loginForm = (event) => {
+    event.preventDefault();
+    loginHandler(loginCredentials.email, loginCredentials.password);
+  };
+
+  const testHandler = (event) => {
+    event.preventDefault();
+    setLoginCredentials({
+      email: "adarshbalika@gmail.com",
+      password: "adarshBalika123",
+    });
+  };
 
   return (
     <section className="login-signup-page">
       <div className="login-signup-form login-form">
         <h1 className="form-heading margin-bottom-2rem">LOGIN</h1>
-        <form>
-          <label for="email"></label>
+        {/* <form action="" onSubmit={loginForm}> */}
+        <form action="">
+          <label htmlFor="email"></label>
           <input
             className="login-email margin-bottom-2rem"
             type="text"
             id="email"
             name="email"
             placeholder="johndoe@example.com"
+            value={loginCredentials.email}
+            onChange={(e) =>
+              setLoginCredentials({
+                ...loginCredentials,
+                email: e.target.value,
+              })
+            }
+            required
           />
-          <label for="password"></label>
+          <label htmlFor="password"></label>
           <input
             className="login-password margin-bottom-2rem"
             type="password"
             id="password"
             name="password"
             placeholder="password"
+            value={loginCredentials.password}
+            onChange={(e) =>
+              setLoginCredentials({
+                ...loginCredentials,
+                password: e.target.value,
+              })
+            }
+            required
           />
           <div className="remember-me-block">
             <input
@@ -39,7 +69,7 @@ const Login = () => {
               id="remember-me"
               name="remember me"
             ></input>
-            <label className="remember-me-label" for="remember-me">
+            <label className="remember-me-label" htmlFor="remember-me">
               Remember me
             </label>
           </div>
@@ -49,26 +79,23 @@ const Login = () => {
             </Link>
           </div>
           <div className="buttons-block">
-            <button
-              className="login login-test"
-              onClick={() =>
-                setLoginCredentials({
-                  email: "adarshbalika@gmail.com",
-                  password: "adarshBalika123",
-                })
-              }
-            >
+            <button className="login login-test" onClick={testHandler}>
               Login using test credentials
             </button>
-            <button className="login login-btn">LOGIN</button>
+            <button
+              className="login login-btn"
+              onClick={(event) => loginForm(event)}
+            >
+              LOGIN
+            </button>
           </div>
+          <p className="login-para">
+            Not a user yet?
+            <Link className="login-link" to="/signup">
+              Create your account
+            </Link>
+          </p>
         </form>
-        <p className="login-para">
-          Not a user yet?
-          <Link className="login-link" to="/signup">
-            Create your account
-          </Link>
-        </p>
       </div>
     </section>
   );
