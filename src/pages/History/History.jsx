@@ -1,33 +1,46 @@
 import React from "react";
 import { videos } from "../../backend/db/videos";
+import { useVideo } from "../../context/VideoContext";
 import { VideoCard } from "../../components/VideoCard/VideoCard";
 import { Sidebar } from "../../components/Sidebar/Sidebar";
-
-import { useLikedVideos } from "../../context/LikedVideosContext";
 import {
   LikeIcon,
   WatchLaterClickIcon,
   PlaylistPlayIcon,
 } from "../../Assets/Svg/allsvg";
-import "./WatchLater.css";
-import { useVideo } from "../../context/VideoContext";
+import "./History.css";
 import { useAuth } from "../../context/authContext";
 
-const WatchLater = () => {
-  const { token } = useAuth();
-  const { videoState, getLikes, removeLikes, getWatchLater, removeWatchLater } =
-    useVideo();
-  const { watchLater } = videoState;
+const History = () => {
+  const { token, getLikes, removeLikes, getWatchLater, removeWatchLater } =
+    useAuth();
+  //   const {
+  //     videoState,
+  //     getLikes,
+  //     removeLikes,
+  //     getWatchLater,
+  //     removeWatchLater,
+  //     getHistory,
+  //     removeHistory,
+  //   } = useVideo();
+  const { videoState } = useVideo();
+  const { history } = videoState;
 
-  const likeVideoToggleHandler = (video) => {
+  //   const likeVideoToggleHandler = (video) => {
+  //     videoState.liked.some((item) => item._id === video._id)
+  //       ? removeLikes(video._id)
+  //       : getLikes(video);
+  //   };
+  const likeVideoToggleHandler = (token, video) => {
     videoState.liked.some((item) => item._id === video._id)
-      ? removeLikes(video._id)
-      : getLikes(video);
+      ? removeLikes(token, video._id)
+      : getLikes(token, video);
   };
-  const watchLaterToggleHandler = (video) => {
+
+  const watchLaterToggleHandler = (token, video) => {
     videoState.watchLater.some((item) => item._id === video._id)
-      ? removeWatchLater(video._id)
-      : getWatchLater(video);
+      ? removeWatchLater(token, video._id)
+      : getWatchLater(token, video);
   };
 
   return (
@@ -36,7 +49,7 @@ const WatchLater = () => {
         <Sidebar className="item-c" />
         <div className="main-content">
           <div className="videos-container">
-            {watchLater.map((video) => {
+            {history.map((video) => {
               return (
                 <div className="video-card">
                   <div className="vid-thumbnail">
@@ -82,4 +95,4 @@ const WatchLater = () => {
   //   });
 };
 
-export { WatchLater };
+export { History };

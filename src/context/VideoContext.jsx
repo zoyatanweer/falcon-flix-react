@@ -5,16 +5,19 @@ import {
   useReducer,
   useState,
 } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import {
   getVideos,
   getCategories,
   getLikedVideos,
+  getHistoryVideos,
   postLikedVideos,
   removeLikedVideos,
   removeWatchLaterVideos,
+  removeHistoryVideos,
   postWatchLaterVideos,
+  postHistoryVideos,
 } from "../api/videos";
 
 const VideoContext = createContext(null);
@@ -24,6 +27,7 @@ const initialState = {
   categories: [],
   liked: [],
   watchLater: [],
+  history: [],
 };
 
 const VideoProvider = ({ children }) => {
@@ -46,7 +50,6 @@ const VideoProvider = ({ children }) => {
           ...videoState,
           liked: action.payload,
         };
-
       case "REMOVE_FROM_LIKED":
         return {
           ...videoState,
@@ -61,6 +64,21 @@ const VideoProvider = ({ children }) => {
         return {
           ...videoState,
           watchLater: action.payload,
+        };
+      case "ADD_TO_HISTORY":
+        return {
+          ...videoState,
+          liked: action.payload,
+        };
+      case "REMOVE_FROM_HISTORY":
+        return {
+          ...videoState,
+          liked: action.payload,
+        };
+      case "CLEAR_HISTORY":
+        return {
+          ...videoState,
+          liked: action.payload,
         };
     }
   };
@@ -114,9 +132,9 @@ const VideoProvider = ({ children }) => {
     }
   };
 
-  const removeLikes = async (_id, token) => {
+  const removeLikes = async (token, _id) => {
     try {
-      const response = await removeLikedVideos(_id, token);
+      const response = await removeLikedVideos(token, _id);
       videoDispatch({ type: "REMOVE_FROM_LIKED", payload: response.likes });
     } catch (error) {
       console.log(error);
@@ -124,10 +142,10 @@ const VideoProvider = ({ children }) => {
   };
 
   // watchlater functionality
-  const getWatchLater = async (video, token) => {
+  const getWatchLater = async (token, video) => {
     if (token) {
       try {
-        const response = await postWatchLaterVideos(video, token);
+        const response = await postWatchLaterVideos(token, video);
         videoDispatch({
           type: "ADD_TO_WATCHLATER",
           payload: response.watchlater,
@@ -140,12 +158,41 @@ const VideoProvider = ({ children }) => {
     }
   };
 
-  const removeWatchLater = async (_id, token) => {
+  const removeWatchLater = async (token, _id) => {
     try {
-      const response = await removeWatchLaterVideos(_id, token);
+      const response = await removeWatchLaterVideos(token, _id);
       videoDispatch({
         type: "REMOVE_FROM_WATCHLATER",
         payload: response.watchlater,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // history functionality
+  const getHistory = async (token, video) => {
+    if (token) {
+      try {
+        const response = await postHistoryVideos(token, video);
+        videoDispatch({
+          type: "ADD_TO_HISTORY",
+          payload: response.history,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      navigate("/login");
+    }
+  };
+
+  const removeHistory = async (token, _id) => {
+    try {
+      const response = await removeHistoryVideos(token, _id);
+      videoDispatch({
+        type: "REMOVE_FROM_HISTORY",
+        payload: response.history,
       });
     } catch (error) {
       console.log(error);
@@ -161,6 +208,8 @@ const VideoProvider = ({ children }) => {
         removeLikes,
         getWatchLater,
         removeWatchLater,
+        getHistory,
+        removeHistory,
       }}
     >
       {children}

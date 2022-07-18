@@ -23,6 +23,9 @@
 
   margin: 2rem 1rem;
 }
+.video-card:hover {
+  cursor: pointer;
+}
 .vid-thumbnail {
   /* width: 50rem;
   height: 50rem; */

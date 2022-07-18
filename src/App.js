@@ -9,6 +9,7 @@ import { Login } from "./pages/Login/Login";
 import { Signup } from "./pages/SignUp/SignUp";
 import { Liked } from "./pages/Liked/Liked";
 import { WatchLater } from "./pages/WatchLater/WatchLater";
+import { History } from "./pages/History/History";
 
 function App() {
   return (
@@ -18,6 +19,8 @@ function App() {
         <Route path="/" element={<Homepage />} />
         <Route path="/explore" element={<Explore />} />
         <Route path="/liked" element={<Liked />} />
+        <Route path="/history" element={<History />} />
+
         {/* <Route path="/playlist" element={<Playlist />} /> */}
         <Route path="/watchLater" element={<WatchLater />} />
         <Route path="/login" element={<Login />} />

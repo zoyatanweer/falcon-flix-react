@@ -3,7 +3,6 @@ import { videos } from "../../backend/db/videos";
 import { VideoCard } from "../../components/VideoCard/VideoCard";
 import { Sidebar } from "../../components/Sidebar/Sidebar";
 
-import { useLikedVideos } from "../../context/LikedVideosContext";
 import {
   LikeIcon,
   WatchLaterClickIcon,
@@ -11,15 +10,31 @@ import {
 } from "../../Assets/Svg/allsvg";
 import "./Liked.css";
 import { useVideo } from "../../context/VideoContext";
+import { useAuth } from "../../context/authContext";
+import { getHistoryVideos } from "../../api/videos";
 
 const Liked = () => {
-  const { videoState, getLikes, removeLikes } = useVideo();
+  const { token } = useAuth();
+  const {
+    videoState,
+    getLikes,
+    removeLikes,
+    getWatchLater,
+    removeWatchLater,
+    getHistory,
+  } = useVideo();
   const { liked } = videoState;
 
-  const likeVideoToggleHandler = (video) => {
+  const likeVideoToggleHandler = (token, video) => {
     videoState.liked.some((item) => item._id === video._id)
-      ? removeLikes(video._id)
-      : getLikes(video);
+      ? removeLikes(token, video._id)
+      : getLikes(token, video);
+  };
+
+  const watchLaterToggleHandler = (token, video) => {
+    videoState.watchLater.some((item) => item._id === video._id)
+      ? removeWatchLater(token, video._id)
+      : getWatchLater(token, video);
   };
 
   return (
@@ -32,7 +47,11 @@ const Liked = () => {
               return (
                 <div className="video-card">
                   <div className="vid-thumbnail">
-                    <img className="vid-img" src={video.img}></img>
+                    <img
+                      className="vid-img"
+                      src={video.img}
+                      onClick={() => getHistory(token, video)}
+                    ></img>
                   </div>
                   <div className="vid-title">
                     <h6 className="typography-h6 title">{video.title}</h6>
@@ -42,9 +61,18 @@ const Liked = () => {
                     <div className="vid-services">
                       <LikeIcon
                         className="liked-clicked"
-                        onClick={() => likeVideoToggleHandler(video)}
+                        onClick={() => likeVideoToggleHandler(token, video)}
+                        {...videoState.liked.some(
+                          (item) => item._id === video._id
+                        )}
                       />
-                      <WatchLaterClickIcon className="watchLater-clicked" />
+                      <WatchLaterClickIcon
+                        className="watchLater-clicked"
+                        onClick={() => watchLaterToggleHandler(token, video)}
+                        {...videoState.watchLater.some(
+                          (item) => item._id === video._id
+                        )}
+                      />
                       <PlaylistPlayIcon />
                     </div>
                     <p className="date para-xsmall ">{video.dateUploaded}</p>

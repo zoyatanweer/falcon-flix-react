@@ -1,6 +1,7 @@
 import axios from "axios";
+import { useAuth } from "../context/authContext";
 
-const token = localStorage.getItem("token");
+// const token = localStorage.getItem("token");
 
 const getVideos = async () => {
   try {
@@ -27,7 +28,8 @@ const getCategories = async () => {
 };
 
 // liked
-const getLikedVideos = async () => {
+const getLikedVideos = async (token) => {
+  // const { token } = useAuth();
   try {
     const response = await axios.get("/api/user/likes", {
       headers: {
@@ -40,7 +42,7 @@ const getLikedVideos = async () => {
   }
 };
 
-const postLikedVideos = async (video) => {
+const postLikedVideos = async (token, video) => {
   try {
     const response = await axios.post(
       "/api/user/likes",
@@ -54,7 +56,7 @@ const postLikedVideos = async (video) => {
   }
 };
 
-const removeLikedVideos = async (_id) => {
+const removeLikedVideos = async (token, _id) => {
   try {
     const response = await axios({
       method: "delete",
@@ -70,7 +72,8 @@ const removeLikedVideos = async (_id) => {
 };
 
 // watch later
-const getWatchLaterVideos = async () => {
+const getWatchLaterVideos = async (token) => {
+  // const { token } = useAuth();
   try {
     const response = await axios({
       method: "GET",
@@ -85,7 +88,7 @@ const getWatchLaterVideos = async () => {
   }
 };
 
-const postWatchLaterVideos = async (video) => {
+const postWatchLaterVideos = async (token, video) => {
   try {
     const response = await axios({
       method: "POST",
@@ -103,11 +106,62 @@ const postWatchLaterVideos = async (video) => {
   }
 };
 
-const removeWatchLaterVideos = async (_id) => {
+const removeWatchLaterVideos = async (token, _id) => {
   try {
     const response = await axios({
       method: "delete",
       url: `/api/user/watchlater/${_id}`,
+      headers: { authorization: token },
+    });
+    if (response.status === 200 || response.status === 201) {
+      return response.data;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+//history
+const getHistoryVideos = async (token) => {
+  // const { token } = useAuth();
+
+  try {
+    const response = await axios({
+      method: "GET",
+      url: "/api/user/history",
+      headers: {
+        authorization: token,
+      },
+    });
+    if (response.status === 200) return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const postHistoryVideos = async (token, video) => {
+  try {
+    const response = await axios({
+      method: "POST",
+      url: "/api/user/history",
+      data: { video },
+      headers: {
+        authorization: token,
+      },
+    });
+    if (response.status === 200 || response.status === 201) {
+      return response.data;
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const removeHistoryVideos = async (token, _id) => {
+  try {
+    const response = await axios({
+      method: "delete",
+      url: `/api/user/history/${_id}`,
       headers: { authorization: token },
     });
     if (response.status === 200 || response.status === 201) {
@@ -127,4 +181,7 @@ export {
   getWatchLaterVideos,
   postWatchLaterVideos,
   removeWatchLaterVideos,
+  getHistoryVideos,
+  postHistoryVideos,
+  removeHistoryVideos,
 };
