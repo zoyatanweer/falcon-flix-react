@@ -1,20 +1,22 @@
 import React from "react";
 
-import { useLikedVideos } from "../../context/LikedVideosContext";
-
 import {
   LikedIconFilled,
   LikeIcon,
-  OptionsIcon,
   PlaylistPlayIcon,
   WatchLaterClickIcon,
 } from "../../Assets/Svg/allsvg";
 import { videos } from "../../backend/db/videos";
 import "./VideoCard.css";
 import { useVideo } from "../../context/VideoContext";
+import { removeWatchLaterVideos } from "../../api/videos";
+import { useAuth } from "../../context/authContext";
 
 const VideoCard = () => {
-  const { videoState, removeLikes, getLikes } = useVideo();
+  const { token } = useAuth();
+
+  const { videoState, removeLikes, getLikes, getWatchLater, removeWatchLater } =
+    useVideo();
   const { videos } = videoState;
 
   // const likeVideoToggleHandler = (video) => {
@@ -26,10 +28,16 @@ const VideoCard = () => {
   // const isInLikedVideos =
   //   likedVideos.findIndex((i) => i._id === videos._id) === -1 ? false : true;
 
-  const likeVideoToggleHandler = (video) => {
+  const likeVideoToggleHandler = (token, video) => {
     videoState.liked.some((item) => item._id === video._id)
-      ? removeLikes(video._id)
-      : getLikes(video);
+      ? removeLikes(token, video._id)
+      : getLikes(token, video);
+  };
+
+  const watchLaterToggleHandler = (video, token) => {
+    videoState.watchLater.some((item) => item._id === video._id)
+      ? removeWatchLater(video._id, token)
+      : getWatchLater(video, token);
   };
 
   return videos.map((video) => {
@@ -47,14 +55,17 @@ const VideoCard = () => {
           <div className="vid-services">
             <LikeIcon
               className="liked-clicked"
-              onClick={() => likeVideoToggleHandler(video)}
+              onClick={() => likeVideoToggleHandler(token, video)}
               {...(videoState.liked.some((item) => item._id === video._id) ? (
                 <LikeIcon />
               ) : (
                 <LikedIconFilled />
               ))}
             />
-            <WatchLaterClickIcon className="watchLater-clicked" />
+            <WatchLaterClickIcon
+              className="watchLater-clicked"
+              onClick={() => watchLaterToggleHandler(video, token)}
+            />
             <PlaylistPlayIcon />
           </div>
           <p className="date para-xsmall ">{dateUploaded}</p>

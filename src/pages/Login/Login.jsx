@@ -1,36 +1,66 @@
-import React from "react";
-import "./Login.css";
-// import loginSignup from "../../Assets/Images/loginSignup.png";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-// import { useTheme } from "../../Context/Theme/Theme-Context";
+import { useAuth } from "../../context/authContext";
+import "./Login.css";
 
 const Login = () => {
-  //   const { theme } = useTheme();
+  // const { loginHandler } = useAuth();
+  const { loginHandler, loginCredentials, setLoginCredentials } = useAuth();
+  // const [loginCredentials, setLoginCredentials] = useState({
+  //   email: "",
+  //   password: "",
+  // });
+
+  const loginForm = (event) => {
+    event.preventDefault();
+    loginHandler(loginCredentials.email, loginCredentials.password);
+  };
+
+  const testHandler = (event) => {
+    event.preventDefault();
+    setLoginCredentials({
+      email: "adarshbalika@gmail.com",
+      password: "adarshBalika123",
+    });
+  };
 
   return (
-    // <div className={theme === "dark" ? "dark-theme" : "light-theme"}>
     <section className="login-signup-page">
-      {/* <div className="login-img-section">
-        <img className="img-form login-img" src={loginSignup} />
-      </div> */}
       <div className="login-signup-form login-form">
         <h1 className="form-heading margin-bottom-2rem">LOGIN</h1>
-        <form>
-          <label for="email"></label>
+        {/* <form action="" onSubmit={loginForm}> */}
+        <form action="">
+          <label htmlFor="email"></label>
           <input
             className="login-email margin-bottom-2rem"
             type="text"
             id="email"
             name="email"
             placeholder="johndoe@example.com"
+            value={loginCredentials.email}
+            onChange={(e) =>
+              setLoginCredentials({
+                ...loginCredentials,
+                email: e.target.value,
+              })
+            }
+            required
           />
-          <label for="password"></label>
+          <label htmlFor="password"></label>
           <input
             className="login-password margin-bottom-2rem"
             type="password"
             id="password"
             name="password"
             placeholder="password"
+            value={loginCredentials.password}
+            onChange={(e) =>
+              setLoginCredentials({
+                ...loginCredentials,
+                password: e.target.value,
+              })
+            }
+            required
           />
           <div className="remember-me-block">
             <input
@@ -39,7 +69,7 @@ const Login = () => {
               id="remember-me"
               name="remember me"
             ></input>
-            <label className="remember-me-label" for="remember-me">
+            <label className="remember-me-label" htmlFor="remember-me">
               Remember me
             </label>
           </div>
@@ -49,21 +79,25 @@ const Login = () => {
             </Link>
           </div>
           <div className="buttons-block">
-            <button className="login login-test">
+            <button className="login login-test" onClick={testHandler}>
               Login using test credentials
             </button>
-            <button className="login login-btn">LOGIN</button>
+            <button
+              className="login login-btn"
+              onClick={(event) => loginForm(event)}
+            >
+              LOGIN
+            </button>
           </div>
+          <p className="login-para">
+            Not a user yet?
+            <Link className="login-link" to="/signup">
+              Create your account
+            </Link>
+          </p>
         </form>
-        <p className="login-para">
-          Not a user yet?
-          <Link className="login-link" to="/signup">
-            Create your account
-          </Link>
-        </p>
       </div>
     </section>
-    // </div>
   );
 };
 export { Login };

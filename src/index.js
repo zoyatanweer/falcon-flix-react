@@ -5,28 +5,24 @@ import "./index.css";
 import App from "./App";
 import { makeServer } from "./server";
 
-import reportWebVitals from "./reportWebVitals";
-import { LikedVideosProvider } from "./context/LikedVideosContext";
 import { VideoProvider } from "./context/VideoContext";
-// import { AuthProvider } from "./context/authContext";
+import { AuthProvider } from "./context/authContext";
+
+makeServer();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-makeServer();
+// makeServer();
 
 root.render(
   // makeServer();
 
   <React.StrictMode>
     <BrowserRouter>
-      {/* <AuthProvider> */}
-      {/* <LikedVideosProvider> */}
-      <VideoProvider>
-        <App />
-      </VideoProvider>
-      {/* </LikedVideosProvider> */}
-      {/* </AuthProvider> */}
+      <AuthProvider>
+        <VideoProvider>
+          <App />
+        </VideoProvider>
+      </AuthProvider>
     </BrowserRouter>
   </React.StrictMode>
 );
-
-reportWebVitals();
