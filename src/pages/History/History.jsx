@@ -25,7 +25,7 @@ const History = () => {
   //   } = useVideo();
   const { videoState } = useVideo();
   const { history } = videoState;
-
+  console.log("yehistory", history);
   //   const likeVideoToggleHandler = (video) => {
   //     videoState.liked.some((item) => item._id === video._id)
   //       ? removeLikes(video._id)

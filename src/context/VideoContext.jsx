@@ -6,6 +6,8 @@ import {
   useState,
 } from "react";
 import { useNavigate } from "react-router-dom";
+// import toast from "react-toastify/dist/components";
+import toast from "react-hot-toast";
 
 import {
   getVideos,
@@ -124,11 +126,13 @@ const VideoProvider = ({ children }) => {
       try {
         const response = await postLikedVideos(token, video);
         videoDispatch({ type: "ADD_TO_LIKED", payload: response.likes });
+        toast.success("Video added to likes!");
       } catch (error) {
         console.log(error);
       }
     } else {
       navigate("/login");
+      toast.error("You're not logged in!");
     }
   };
 
@@ -136,8 +140,10 @@ const VideoProvider = ({ children }) => {
     try {
       const response = await removeLikedVideos(token, _id);
       videoDispatch({ type: "REMOVE_FROM_LIKED", payload: response.likes });
+      toast.error("Video removed from likes!");
     } catch (error) {
       console.log(error);
+      toast.error("You're not logged in!");
     }
   };
 
@@ -150,10 +156,12 @@ const VideoProvider = ({ children }) => {
           type: "ADD_TO_WATCHLATER",
           payload: response.watchlater,
         });
+        toast.success("Video added to watch later!");
       } catch (error) {
         console.log(error);
       }
     } else {
+      toast.error("You're not logged in!");
       navigate("/login");
     }
   };
@@ -165,8 +173,10 @@ const VideoProvider = ({ children }) => {
         type: "REMOVE_FROM_WATCHLATER",
         payload: response.watchlater,
       });
+      toast.error("Video removed from watch later!");
     } catch (error) {
       console.log(error);
+      toast.error("You're not logged in!");
     }
   };
 
@@ -183,6 +193,7 @@ const VideoProvider = ({ children }) => {
         console.log(error);
       }
     } else {
+      toast.error("You're not logged in!");
       navigate("/login");
     }
   };
@@ -194,8 +205,10 @@ const VideoProvider = ({ children }) => {
         type: "REMOVE_FROM_HISTORY",
         payload: response.history,
       });
+      toast.error("Video removed from history!");
     } catch (error) {
       console.log(error);
+      toast.error("You're not logged in!");
     }
   };
 

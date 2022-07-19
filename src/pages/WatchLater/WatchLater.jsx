@@ -19,15 +19,15 @@ const WatchLater = () => {
     useVideo();
   const { watchLater } = videoState;
 
-  const likeVideoToggleHandler = (video) => {
+  const likeVideoToggleHandler = (token, video) => {
     videoState.liked.some((item) => item._id === video._id)
-      ? removeLikes(video._id)
-      : getLikes(video);
+      ? removeLikes(token, video._id)
+      : getLikes(token, video);
   };
-  const watchLaterToggleHandler = (video) => {
+  const watchLaterToggleHandler = (token, video) => {
     videoState.watchLater.some((item) => item._id === video._id)
-      ? removeWatchLater(video._id)
-      : getWatchLater(video);
+      ? removeWatchLater(token, video._id)
+      : getWatchLater(token, video);
   };
 
   return (

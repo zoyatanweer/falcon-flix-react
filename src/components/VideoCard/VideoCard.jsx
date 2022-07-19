@@ -22,7 +22,7 @@ const VideoCard = () => {
     removeWatchLater,
     getHistory,
   } = useVideo();
-  const { videos } = videoState;
+  const { videos, history } = videoState;
 
   // const likeVideoToggleHandler = (video) => {
   //   const index =
@@ -44,6 +44,8 @@ const VideoCard = () => {
       ? removeWatchLater(token, video._id)
       : getWatchLater(token, video);
   };
+
+  console.log("history lo", history);
 
   return videos.map((video) => {
     const { title, img, creator, dateUploaded } = video;

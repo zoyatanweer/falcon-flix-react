@@ -1,9 +1,15 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
+// import { ToastContainer, toast } from "react-toastify";
+// import { toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
+
+// import toast, { Toaster } from "react-hot-toast";
+import { Toast } from "./components/Toast";
+
 import { Header } from "./components/Header/Header";
 import { Homepage } from "./pages/Homepage/Homepage";
 import { Explore } from "./pages/Explore/Explore";
-import { Sidebar } from "./components/Sidebar/Sidebar";
 import { Footer } from "./components/Footer/Footer";
 import { Login } from "./pages/Login/Login";
 import { Signup } from "./pages/SignUp/SignUp";
@@ -14,6 +20,8 @@ import { History } from "./pages/History/History";
 function App() {
   return (
     <div className="App">
+      {/* <Toaster /> */}
+      <Toast />
       <Header />
       <Routes>
         <Route path="/" element={<Homepage />} />

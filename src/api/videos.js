@@ -123,8 +123,6 @@ const removeWatchLaterVideos = async (token, _id) => {
 
 //history
 const getHistoryVideos = async (token) => {
-  // const { token } = useAuth();
-
   try {
     const response = await axios({
       method: "GET",
