@@ -1,7 +1,7 @@
 import { createContext, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-// import { loginAPI, signupAPI } from "../api/auth";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const AuthContext = createContext(null);
 
@@ -38,9 +38,11 @@ const AuthProvider = ({ children }) => {
         setToken(response.data.encodedToken);
         setUser(response.data.foundUser);
         navigate("/");
+        toast.success("You're logged in!");
       }
     } catch (error) {
       console.log(error);
+      toast.error("Unable to log you in!");
     }
   };
 
@@ -53,9 +55,11 @@ const AuthProvider = ({ children }) => {
         setToken(response.data.encodedToken);
         setUser(response.data.createdUser);
         navigate("/");
+        toast.success("You're logged in !");
       }
     } catch (error) {
       console.log(error);
+      toast.error("Unable to sign you up!");
     }
   };
 
@@ -65,6 +69,7 @@ const AuthProvider = ({ children }) => {
     localStorage.removeItem("user");
     setToken(null);
     setUser(null);
+    toast.success("You're logged out!");
   };
 
   return (

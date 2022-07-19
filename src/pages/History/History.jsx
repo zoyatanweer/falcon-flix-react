@@ -1,30 +1,36 @@
 import React from "react";
 import { videos } from "../../backend/db/videos";
+import { useVideo } from "../../context/VideoContext";
 import { VideoCard } from "../../components/VideoCard/VideoCard";
 import { Sidebar } from "../../components/Sidebar/Sidebar";
-
 import {
   LikeIcon,
   WatchLaterClickIcon,
   PlaylistPlayIcon,
 } from "../../Assets/Svg/allsvg";
-import "./Liked.css";
-import { useVideo } from "../../context/VideoContext";
+import "./History.css";
 import { useAuth } from "../../context/authContext";
-import { getHistoryVideos } from "../../api/videos";
 
-const Liked = () => {
-  const { token } = useAuth();
-  const {
-    videoState,
-    getLikes,
-    removeLikes,
-    getWatchLater,
-    removeWatchLater,
-    getHistory,
-  } = useVideo();
-  const { liked } = videoState;
-
+const History = () => {
+  const { token, getLikes, removeLikes, getWatchLater, removeWatchLater } =
+    useAuth();
+  //   const {
+  //     videoState,
+  //     getLikes,
+  //     removeLikes,
+  //     getWatchLater,
+  //     removeWatchLater,
+  //     getHistory,
+  //     removeHistory,
+  //   } = useVideo();
+  const { videoState } = useVideo();
+  const { history } = videoState;
+  console.log("yehistory", history);
+  //   const likeVideoToggleHandler = (video) => {
+  //     videoState.liked.some((item) => item._id === video._id)
+  //       ? removeLikes(video._id)
+  //       : getLikes(video);
+  //   };
   const likeVideoToggleHandler = (token, video) => {
     videoState.liked.some((item) => item._id === video._id)
       ? removeLikes(token, video._id)
@@ -43,15 +49,11 @@ const Liked = () => {
         <Sidebar className="item-c" />
         <div className="main-content">
           <div className="videos-container">
-            {liked.map((video) => {
+            {history.map((video) => {
               return (
                 <div className="video-card">
                   <div className="vid-thumbnail">
-                    <img
-                      className="vid-img"
-                      src={video.img}
-                      onClick={() => getHistory(token, video)}
-                    ></img>
+                    <img className="vid-img" src={video.img}></img>
                   </div>
                   <div className="vid-title">
                     <h6 className="typography-h6 title">{video.title}</h6>
@@ -93,4 +95,4 @@ const Liked = () => {
   //   });
 };
 
-export { Liked };
+export { History };
