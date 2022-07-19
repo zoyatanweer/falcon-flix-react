@@ -7,6 +7,7 @@ import {
   WatchLaterClickIcon,
 } from "../../Assets/Svg/allsvg";
 import { videos } from "../../backend/db/videos";
+import { Link } from "react-router-dom";
 import "./VideoCard.css";
 import { useVideo } from "../../context/VideoContext";
 import { useAuth } from "../../context/authContext";
@@ -52,11 +53,13 @@ const VideoCard = () => {
     return (
       <div className="video-card">
         <div className="vid-thumbnail">
-          <img
-            className="vid-img"
-            src={img}
-            onClick={() => getHistory(token, video)}
-          ></img>
+          <Link to={`/explore/${video._id}`}>
+            <img
+              className="vid-img"
+              src={img}
+              onClick={() => getHistory(token, video)}
+            ></img>
+          </Link>
         </div>
         <div className="vid-title">
           <h6 className="typography-h6 title">{title}</h6>
@@ -68,9 +71,9 @@ const VideoCard = () => {
               className="liked-clicked"
               onClick={() => likeVideoToggleHandler(token, video)}
               {...(videoState.liked.some((item) => item._id === video._id) ? (
-                <LikeIcon />
-              ) : (
                 <LikedIconFilled />
+              ) : (
+                <LikeIcon />
               ))}
             />
             <WatchLaterClickIcon
