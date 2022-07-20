@@ -8,3 +8,8 @@
   background-color: var(--text-color);
   color: var(--primary-color);
 }
+.btn-logout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

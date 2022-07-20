@@ -1,5 +1,5 @@
 import React from "react";
-import { SearchIcon, UserIcon } from "../../Assets/Svg/allsvg";
+import { LogOutIcon, SearchIcon, UserIcon } from "../../Assets/Svg/allsvg";
 import { NavLink } from "react-router-dom";
 import "./Header.css";
 import { useAuth } from "../../context/authContext";
@@ -29,8 +29,9 @@ const Header = () => {
             <NavLink to="/">
               <button
                 onClick={logoutHandler}
-                className=" btn box-shadow btn-primary"
+                className=" btn box-shadow btn-primary btn-logout"
               >
+                <LogOutIcon />
                 Logout
               </button>
             </NavLink>

@@ -1,3 +1,9 @@
+.page-active {
+  background-color: var(--primary-color);
+  border-radius: 10px;
+  cursor: pointer;
+}
+
 .sidebar-item {
   display: flex;
   justify-items: center;

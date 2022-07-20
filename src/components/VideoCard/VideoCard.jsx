@@ -5,6 +5,7 @@ import {
   LikeIcon,
   PlaylistPlayIcon,
   WatchLaterClickIcon,
+  WatchLaterIcon,
 } from "../../Assets/Svg/allsvg";
 import { videos } from "../../backend/db/videos";
 import { Link } from "react-router-dom";
@@ -79,7 +80,13 @@ const VideoCard = () => {
             <WatchLaterClickIcon
               className="watchLater-clicked"
               onClick={() => watchLaterToggleHandler(token, video)}
-              {...videoState.watchLater.some((item) => item._id === video._id)}
+              {...(videoState.watchLater.some(
+                (item) => item._id === video._id
+              ) ? (
+                <WatchLaterIcon />
+              ) : (
+                <WatchLaterClickIcon />
+              ))}
             />
             <PlaylistPlayIcon />
           </div>
