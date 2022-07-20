@@ -1,12 +1,6 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
-// import { ToastContainer, toast } from "react-toastify";
-// import { toast } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
-
-// import toast, { Toaster } from "react-hot-toast";
 import { Toast } from "./components/Toast";
-
 import { Header } from "./components/Header/Header";
 import { Homepage } from "./pages/Homepage/Homepage";
 import { Explore } from "./pages/Explore/Explore";
@@ -16,6 +10,7 @@ import { Signup } from "./pages/SignUp/SignUp";
 import { Liked } from "./pages/Liked/Liked";
 import { WatchLater } from "./pages/WatchLater/WatchLater";
 import { History } from "./pages/History/History";
+import { SingleVideo } from "./pages/SingleVideo/SingleVideo";
 
 function App() {
   return (
@@ -31,6 +26,7 @@ function App() {
 
         {/* <Route path="/playlist" element={<Playlist />} /> */}
         <Route path="/watchLater" element={<WatchLater />} />
+        <Route path="/explore/:videoID" element={<SingleVideo />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>

@@ -24,14 +24,13 @@
   margin: 2rem 1rem;
 }
 .video-card:hover {
+  background-color: #212529;
+  background-color: #42484f;
+  /* background-color: #444b53; */
   cursor: pointer;
 }
 .vid-thumbnail {
-  /* width: 50rem;
-  height: 50rem; */
   object-fit: cover;
-  /* height: 10rem; */
-  /* width: 10rem; */
 }
 .vid-title {
   display: flex;
@@ -44,7 +43,6 @@
   color: #ced4da;
   display: flex;
   justify-content: space-between;
-  /* justify-content: center; */
   align-items: center;
   padding: 0 0.5rem;
   margin-left: 5px;
@@ -70,7 +68,6 @@
 .typography-h6 {
   display: flex;
   justify-content: space-between;
-  /* align-items: flex-start; */
 }
 
 /* video-services-icons */
