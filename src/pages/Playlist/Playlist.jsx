@@ -22,7 +22,7 @@ const Playlist = () => {
     removeWatchLater,
     getHistory,
   } = useVideo();
-  const { liked } = videoState;
+  const { playlists } = videoState;
 
   const likeVideoToggleHandler = (token, video) => {
     videoState.liked.some((item) => item._id === video._id)
@@ -44,7 +44,7 @@ const Playlist = () => {
           <div className="page-section">
             <h2 className="page-title">PLAYLIST</h2>
           </div>
-          {liked.map((video) => {
+          {playlists.map((video) => {
             return (
               <div className="video-card">
                 <div className="vid-thumbnail">

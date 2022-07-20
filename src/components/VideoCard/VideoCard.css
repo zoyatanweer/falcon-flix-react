@@ -1,15 +1,8 @@
 .videos-container {
   display: flex;
-  /* flex-direction: column; */
-  /* justify-content: center; */
-  /* align-items: center; */
-  /* display: grid;
-  grid-template-columns: repeat(3, 1fr); */
+
   justify-content: center;
-  /* grid-auto-flow: column; */
   flex-wrap: wrap;
-  /* height: 30rem;
-  width: 30rem; */
 }
 
 .video-card {
@@ -26,7 +19,6 @@
 .video-card:hover {
   background-color: #212529;
   background-color: #42484f;
-  /* background-color: #444b53; */
   cursor: pointer;
 }
 .vid-thumbnail {

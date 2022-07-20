@@ -16,7 +16,6 @@ import { Playlist } from "./pages/Playlist/Playlist";
 function App() {
   return (
     <div className="App">
-      {/* <Toaster /> */}
       <Toast />
       <Header />
       <Routes>

@@ -51,27 +51,6 @@ const LikedVideosProvider = ({ children }) => {
     });
   };
 
-  //   const addVideoToLike = (video) => {
-  //     fetchLikedVideos({
-  //       method: "POST",
-  //       url: "/api/user/likes",
-  //       headers: {
-  //         authorization: { token },
-  //       },
-  //       data: { video },
-  //     });
-  //   };
-
-  //   const removeVideoFromLike = (videoId) => {
-  //     fetchLikedVideos({
-  //       method: "DELETE",
-  //       url: `/api/user/likes/${videoId}`,
-  //       headers: {
-  //         authorization: { token },
-  //       },
-  //     });
-  //   };
-
   return (
     <LikedVideosContext.Provider
       value={{

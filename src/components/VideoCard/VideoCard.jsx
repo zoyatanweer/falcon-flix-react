@@ -67,9 +67,6 @@ const VideoCard = () => {
       backgroundColor: "transparent",
     },
     content: {
-      // width: "20%",
-      // height: "40%",
-      margin: "5rem auto",
       backgroundColor: "var(--background-color)",
       color: "var(--text-color)",
       textAlign: "center",

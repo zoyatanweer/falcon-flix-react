@@ -27,8 +27,6 @@ const AuthProvider = ({ children }) => {
     console.log("login aya");
     try {
       const response = await axios.post("/api/auth/login", {
-        // email: loginCredentials.email,
-        // password: loginCredentials.password,
         email: "adarshbalika@gmail.com",
         password: "adarshBalika123",
       });
