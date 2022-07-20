@@ -1,20 +1,25 @@
 import React from "react";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import Modal from "react-modal";
 
 import {
   LikedIconFilled,
   LikeIcon,
+  ModalCloseIcon,
   PlaylistPlayIcon,
   WatchLaterClickIcon,
   WatchLaterIcon,
 } from "../../Assets/Svg/allsvg";
 import { videos } from "../../backend/db/videos";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./VideoCard.css";
 import { useVideo } from "../../context/VideoContext";
 import { useAuth } from "../../context/authContext";
 
 const VideoCard = () => {
   const { token } = useAuth();
+  const navigate = useNavigate();
 
   const {
     videoState,
@@ -23,17 +28,14 @@ const VideoCard = () => {
     getWatchLater,
     removeWatchLater,
     getHistory,
+    addVideoToPlaylist,
+    createPlaylist,
+    deleteVideoFromPlaylist,
   } = useVideo();
-  const { videos, history } = videoState;
-
-  // const likeVideoToggleHandler = (video) => {
-  //   const index =
-  //     likedVideos.findIndex((item) => item._id === video._id) === -1;
-  // };
-
-  // }
-  // const isInLikedVideos =
-  //   likedVideos.findIndex((i) => i._id === videos._id) === -1 ? false : true;
+  const { videos } = videoState;
+  const [playlistModal, setPlaylistModal] = useState(false);
+  const [newPlaylist, setNewPlaylist] = useState("");
+  const [currentVideo, setCurrentVideo] = useState({});
 
   const likeVideoToggleHandler = (token, video) => {
     videoState.liked.some((item) => item._id === video._id)
@@ -47,7 +49,43 @@ const VideoCard = () => {
       : getWatchLater(token, video);
   };
 
-  console.log("history lo", history);
+  const isUserLoggedIn = (token, video) => {
+    if (token) {
+      setPlaylistModal(true);
+      var curr = videoState.videos.find(
+        (singleVideo) => singleVideo._id === video._id
+      );
+      setCurrentVideo(curr);
+    } else {
+      toast.error("You're not logged in!");
+      navigate("/login");
+    }
+  };
+
+  const modalStyle = {
+    overlay: {
+      backgroundColor: "transparent",
+    },
+    content: {
+      backgroundColor: "var(--background-color)",
+      color: "var(--text-color)",
+      textAlign: "center",
+    },
+  };
+
+  const videoExistInPlaylist = (playlist) =>
+    playlist.videos.some((video) => video._id === currentVideo._id);
+
+  const addNewVideoToPlaylist = (currentVideo, playlist) => {
+    videoExistInPlaylist(playlist)
+      ? deleteVideoFromPlaylist(currentVideo._id, playlist._id, token)
+      : addVideoToPlaylist(currentVideo, playlist._id, token);
+  };
+
+  const createNewPlaylist = (playlistName, token) => {
+    playlistName && createPlaylist(playlistName, token);
+    setNewPlaylist("");
+  };
 
   return videos.map((video) => {
     const { title, img, creator, dateUploaded } = video;
@@ -56,9 +94,9 @@ const VideoCard = () => {
         <div className="vid-thumbnail">
           <Link to={`/explore/${video._id}`}>
             <img
+              onClick={() => getHistory(token, video)}
               className="vid-img"
               src={img}
-              onClick={() => getHistory(token, video)}
             ></img>
           </Link>
         </div>
@@ -88,10 +126,61 @@ const VideoCard = () => {
                 <WatchLaterClickIcon />
               ))}
             />
-            <PlaylistPlayIcon />
+            <PlaylistPlayIcon
+              className="watchLater-clicked"
+              onClick={() => isUserLoggedIn(token, video)}
+            />
           </div>
           <p className="date para-xsmall ">{dateUploaded}</p>
         </div>
+        {playlistModal && (
+          <Modal
+            isOpen={playlistModal}
+            style={modalStyle}
+            className="modal-component"
+          >
+            <h3 className="modal-playlist">
+              Add to Playlist
+              <ModalCloseIcon
+                onClick={() => setPlaylistModal(false)}
+                className="modal-close"
+              />
+            </h3>
+
+            <section>
+              {videoState.playlists.length > 0 &&
+                videoState.playlists.map((playlist) => {
+                  return (
+                    <div key={playlist._id}>
+                      <input
+                        type="checkbox"
+                        checked={videoExistInPlaylist(playlist)}
+                        onChange={() => {
+                          addNewVideoToPlaylist(currentVideo, playlist);
+                        }}
+                      />
+                      <span>{playlist.title}</span>
+                    </div>
+                  );
+                })}
+            </section>
+            <div className="modal-input">
+              <label>Name </label>
+              <input
+                className="playlist-name-input"
+                type="text"
+                value={newPlaylist}
+                onChange={(e) => setNewPlaylist(e.target.value)}
+              />
+            </div>
+            <button
+              className="btn btn-primary btn-create-modal"
+              onClick={() => createNewPlaylist(newPlaylist, token)}
+            >
+              Create Playlist
+            </button>
+          </Modal>
+        )}
       </div>
     );
   });

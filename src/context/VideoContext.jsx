@@ -18,8 +18,14 @@ import {
   removeLikedVideos,
   removeWatchLaterVideos,
   removeHistoryVideos,
+  clearHistoryVideos,
   postWatchLaterVideos,
   postHistoryVideos,
+  getAllPlaylists,
+  makeNewPlaylist,
+  getVideosFromPlaylist,
+  deleteFullPlaylist,
+  removeFromPlaylist,
 } from "../api/videos";
 
 const VideoContext = createContext(null);
@@ -30,6 +36,7 @@ const initialState = {
   liked: [],
   watchLater: [],
   history: [],
+  playlists: [],
 };
 
 const VideoProvider = ({ children }) => {
@@ -81,6 +88,36 @@ const VideoProvider = ({ children }) => {
         return {
           ...videoState,
           liked: action.payload,
+        };
+      case "NEW_PLAYLIST":
+        return {
+          ...videoState,
+          playlists: action.payload,
+        };
+      case "ADD_TO_PLAYLIST":
+        const newPlaylist = videoState.playlists.reduce((prev, curr) => {
+          return action.payload._id === curr._id
+            ? [...prev, action.payload]
+            : [...prev, curr];
+        }, []);
+        return {
+          ...videoState,
+          playlists: newPlaylist,
+        };
+      case "DELETE_FROM_PLAYLIST":
+        const remainingPlaylist = videoState.playlists.reduce((prev, curr) => {
+          return action.payload._id === curr._id
+            ? [...prev, action.payload]
+            : [...prev, curr];
+        }, []);
+        return {
+          ...videoState,
+          playlists: remainingPlaylist,
+        };
+      case "DELETE_PLAYLIST":
+        return {
+          ...videoState,
+          playlists: action.payload,
         };
     }
   };
@@ -212,6 +249,86 @@ const VideoProvider = ({ children }) => {
     }
   };
 
+  const clearHistory = async (token) => {
+    try {
+      const response = await clearHistoryVideos(token);
+      videoDispatch({
+        type: "CLEAR_HISTORY",
+        payload: response.history,
+      });
+      toast.success("History cleared!");
+    } catch (error) {
+      console.log(error);
+      toast.error("Cannot clear history!");
+    }
+  };
+
+  //playlist functionality
+  const createNewPLaylist = async (playListName, token) => {
+    if (token) {
+      try {
+        const response = await makeNewPlaylist(playListName, token);
+        videoDispatch({
+          type: "NEW_PLAYLIST",
+          payload: response.playlists,
+        });
+        toast.success("New playlist created!");
+      } catch (error) {
+        console.log(error);
+        toast.error("Unable to create new playlist!");
+      }
+    } else {
+      navigate("/login");
+      toast.error("You're not logged in!");
+    }
+  };
+
+  const addVideoToPlaylist = async (video, playlistID, token) => {
+    if (token) {
+      try {
+        const response = await addVideoToPlaylist(video, playlistID, token);
+        videoDispatch({
+          type: "ADD_TO_PLAYLIST",
+          payload: response.playlist,
+        });
+        toast.success("Video added to playlist!");
+      } catch (error) {
+        console.log(error);
+        toast.error("Unable to add video to playlist!");
+      }
+    } else {
+      navigate("/login");
+      toast.error("You're not logged in!");
+    }
+  };
+
+  const deleteVideoFromPlaylist = async (videoID, playlistID, token) => {
+    try {
+      const response = await removeFromPlaylist(videoID, playlistID, token);
+      videoDispatch({
+        type: "DELETE_FROM_PLAYLIST",
+        payload: response.playlist,
+      });
+      toast.success("Video deleted from playlist!");
+    } catch (error) {
+      console.log(error);
+      toast.error("Cannot remove video from playlist!");
+    }
+  };
+
+  const deletePlaylist = async (playlistID, token) => {
+    try {
+      const response = await deleteFullPlaylist(playlistID, token);
+      videoDispatch({
+        type: "DELETE_PLAYLIST",
+        payload: response.playlists,
+      });
+      toast.success("Playlist deleted!");
+    } catch (error) {
+      console.log(error);
+      toast.error("Unable to delete playlist!");
+    }
+  };
   return (
     <VideoContext.Provider
       value={{
@@ -223,6 +340,11 @@ const VideoProvider = ({ children }) => {
         removeWatchLater,
         getHistory,
         removeHistory,
+        clearHistory,
+        createNewPLaylist,
+        deleteVideoFromPlaylist,
+        deletePlaylist,
+        makeNewPlaylist,
       }}
     >
       {children}
@@ -232,49 +354,3 @@ const VideoProvider = ({ children }) => {
 
 const useVideo = () => useContext(VideoContext);
 export { useVideo, VideoProvider };
-
-// // reducer function
-// const videoReducerFunc = (videoState, action) => {
-//   switch (action.type) {
-//     case "SET_DATA":
-//       return {
-//         ...videoState,
-//         videos: action.payload,
-//       };
-//     case "SET_CATEGORIES":
-//       return {
-//         ...videoState,
-//         categoriies: action.payload,
-//       };
-//   }
-// };
-
-// useEffect(() => {
-//   const allVideos = async () => {
-//     try {
-//       const response = await getVideos();
-//       videoDispatch({
-//         type: "SET_VIDEOS",
-//         payload: response.videos,
-//       });
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-//   allVideos();
-// }, []);
-
-// useEffect(() => {
-//   const allCategories = async () => {
-//     try {
-//       const response = await getCategories();
-//       videoDispatch({
-//         type: "SET_CATEGORIES",
-//         payload: response.categories,
-//       });
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-//   allCategories();
-// }, []);

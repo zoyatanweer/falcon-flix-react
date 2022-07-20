@@ -36,6 +36,9 @@ const WatchLater = () => {
         <Sidebar className="item-c" />
         <div className="main-content">
           <div className="videos-container">
+            <div className="page-section">
+              <h2 className="page-title">WATCH LATER</h2>
+            </div>
             {watchLater.map((video) => {
               return (
                 <div className="video-card">

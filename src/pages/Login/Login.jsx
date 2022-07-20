@@ -4,12 +4,7 @@ import { useAuth } from "../../context/authContext";
 import "./Login.css";
 
 const Login = () => {
-  // const { loginHandler } = useAuth();
   const { loginHandler, loginCredentials, setLoginCredentials } = useAuth();
-  // const [loginCredentials, setLoginCredentials] = useState({
-  //   email: "",
-  //   password: "",
-  // });
 
   const loginForm = (event) => {
     event.preventDefault();
@@ -28,7 +23,6 @@ const Login = () => {
     <section className="login-signup-page">
       <div className="login-signup-form login-form">
         <h1 className="form-heading margin-bottom-2rem">LOGIN</h1>
-        {/* <form action="" onSubmit={loginForm}> */}
         <form action="">
           <label htmlFor="email"></label>
           <input
