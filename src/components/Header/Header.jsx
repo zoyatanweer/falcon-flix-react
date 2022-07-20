@@ -8,7 +8,6 @@ const Header = () => {
   const { token, logoutHandler } = useAuth();
   return (
     <>
-      {/* ----navigation starts---- */}
       <nav className="navigation-container item-a">
         <div className="nav-brand title-theme">
           <NavLink to="/">
@@ -24,7 +23,6 @@ const Header = () => {
           />
         </div>
         <div className="user-profile">
-          {/* <UserIcon /> */}
           {token ? (
             <NavLink to="/">
               <button
@@ -40,13 +38,9 @@ const Header = () => {
               <button class="btn box-shadow btn-primary">Login</button>
             </NavLink>
           )}
-          {/* <NavLink to="/login">
-            <button class="btn box-shadow btn-primary">Login</button>
-          </NavLink> */}
         </div>
       </nav>
       <div className="division"></div>
-      {/* ----navigation ends---- */}
     </>
   );
 };

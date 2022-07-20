@@ -7,30 +7,25 @@ import {
   LikeIcon,
   WatchLaterClickIcon,
   PlaylistPlayIcon,
+  HistoryIcon,
 } from "../../Assets/Svg/allsvg";
 import "./History.css";
 import { useAuth } from "../../context/authContext";
 
 const History = () => {
-  const { token, getLikes, removeLikes, getWatchLater, removeWatchLater } =
-    useAuth();
-  //   const {
-  //     videoState,
-  //     getLikes,
-  //     removeLikes,
-  //     getWatchLater,
-  //     removeWatchLater,
-  //     getHistory,
-  //     removeHistory,
-  //   } = useVideo();
-  const { videoState } = useVideo();
+  const {
+    videoState,
+    getLikes,
+    removeLikes,
+    getWatchLater,
+    removeWatchLater,
+    getHistory,
+    clearHistory,
+    removeHistory,
+  } = useVideo();
+  const { token } = useAuth();
   const { history } = videoState;
-  console.log("yehistory", history);
-  //   const likeVideoToggleHandler = (video) => {
-  //     videoState.liked.some((item) => item._id === video._id)
-  //       ? removeLikes(video._id)
-  //       : getLikes(video);
-  //   };
+
   const likeVideoToggleHandler = (token, video) => {
     videoState.liked.some((item) => item._id === video._id)
       ? removeLikes(token, video._id)
@@ -49,6 +44,16 @@ const History = () => {
         <Sidebar className="item-c" />
         <div className="main-content">
           <div className="videos-container">
+            <div className="page-section">
+              <h2 className="page-title">HISTORY</h2>
+              <button
+                className="btn btn-primary btn-history"
+                onClick={() => clearHistory(token)}
+              >
+                CLEAR HISTORY
+              </button>
+            </div>
+
             {history.map((video) => {
               return (
                 <div className="video-card">
@@ -76,6 +81,12 @@ const History = () => {
                         )}
                       />
                       <PlaylistPlayIcon />
+                      <HistoryIcon
+                        onClick={() => removeHistory(token, video._id)}
+                        {...videoState.watchLater.some(
+                          (item) => item._id === video._id
+                        )}
+                      />
                     </div>
                     <p className="date para-xsmall ">{video.dateUploaded}</p>
                   </div>
@@ -87,12 +98,6 @@ const History = () => {
       </div>
     </>
   );
-
-  //   const isInLikedVideos =
-  //     likedVideos.findIndex((i) => i._id === videos._id) === -1 ? false : true;
-  //   return videos.map((videos) => {
-  //     return
-  //   });
 };
 
 export { History };

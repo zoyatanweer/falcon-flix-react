@@ -11,6 +11,7 @@ import { Liked } from "./pages/Liked/Liked";
 import { WatchLater } from "./pages/WatchLater/WatchLater";
 import { History } from "./pages/History/History";
 import { SingleVideo } from "./pages/SingleVideo/SingleVideo";
+import { Playlist } from "./pages/Playlist/Playlist";
 
 function App() {
   return (
@@ -23,8 +24,7 @@ function App() {
         <Route path="/explore" element={<Explore />} />
         <Route path="/liked" element={<Liked />} />
         <Route path="/history" element={<History />} />
-
-        {/* <Route path="/playlist" element={<Playlist />} /> */}
+        <Route path="/playlist" element={<Playlist />} />
         <Route path="/watchLater" element={<WatchLater />} />
         <Route path="/explore/:videoID" element={<SingleVideo />} />
         <Route path="/login" element={<Login />} />

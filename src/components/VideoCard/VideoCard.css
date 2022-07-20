@@ -77,3 +77,49 @@
   color: var(--text-color);
   cursor: pointer;
 }
+
+.modal-component {
+  background-color: var(--background-color);
+  height: 40%;
+  width: 20%;
+  position: absolute;
+  left: 45%;
+  top: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.modal-playlist {
+  display: flex;
+  justify-content: space-evenly;
+}
+.modal-close {
+  font-size: 2rem;
+}
+.modal-close:hover {
+  cursor: pointer;
+}
+.modal-input {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.playlist-name-input {
+  height: 2.5rem;
+  width: 80%;
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+}
+.btn-create-modal {
+  border-radius: 5px;
+  font-size: 1.5rem;
+  height: 15%;
+  width: 60%;
+}
+.btn-create-modal:hover {
+  background-color: var(--background-color);
+  border: 1px solid var(--primary-color);
+  color: var(--text-color);
+}

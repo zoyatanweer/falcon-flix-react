@@ -1,6 +1,7 @@
 import React from "react";
 import { videos } from "../../backend/db/videos";
 import { VideoCard } from "../../components/VideoCard/VideoCard";
+import { Link } from "react-router-dom";
 import { Sidebar } from "../../components/Sidebar/Sidebar";
 
 import {
@@ -43,16 +44,21 @@ const Liked = () => {
         <Sidebar className="item-c" />
         <div className="main-content">
           <div className="videos-container">
+            <div className="page-section">
+              <h2 className="page-title">LIKED</h2>
+            </div>
             {liked.map((video) => {
               return (
                 <div className="video-card">
-                  <div className="vid-thumbnail">
-                    <img
-                      className="vid-img"
-                      src={video.img}
-                      onClick={() => getHistory(token, video)}
-                    ></img>
-                  </div>
+                  <Link to={`/explore/${video._id}`}>
+                    <div className="vid-thumbnail">
+                      <img
+                        className="vid-img"
+                        src={video.img}
+                        onClick={() => getHistory(token, video)}
+                      ></img>
+                    </div>
+                  </Link>
                   <div className="vid-title">
                     <h6 className="typography-h6 title">{video.title}</h6>
                     <p className="para-xsmall creator">{video.creator}</p>
