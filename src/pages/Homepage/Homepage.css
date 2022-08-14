@@ -144,6 +144,8 @@
   margin-left: 0;
   padding: 1rem;
   width: 80vw;
+
+  position: relative;
 }
 
 .navigation-container {

@@ -106,26 +106,26 @@ const VideoCard = () => {
         </div>
         <div className="vid-details">
           <div className="vid-services">
-            <LikeIcon
-              className="liked-clicked"
+            <button
               onClick={() => likeVideoToggleHandler(token, video)}
-              {...(videoState.liked.some((item) => item._id === video._id) ? (
+              className="liked-clicked"
+            >
+              {videoState.liked.some((item) => item._id === video._id) ? (
                 <LikedIconFilled />
               ) : (
                 <LikeIcon />
-              ))}
-            />
-            <WatchLaterClickIcon
-              className="watchLater-clicked"
+              )}
+            </button>
+            <button
               onClick={() => watchLaterToggleHandler(token, video)}
-              {...(videoState.watchLater.some(
-                (item) => item._id === video._id
-              ) ? (
+              className="watchLater-clicked"
+            >
+              {videoState.watchLater.some((item) => item._id === video._id) ? (
                 <WatchLaterIcon />
               ) : (
                 <WatchLaterClickIcon />
-              ))}
-            />
+              )}
+            </button>
             <PlaylistPlayIcon
               className="watchLater-clicked"
               onClick={() => isUserLoggedIn(token, video)}

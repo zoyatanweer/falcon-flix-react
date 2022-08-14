@@ -1,19 +1,25 @@
-import React from "react";
-import "./SignUp.css";
-// import loginSignup from "../../Assets/Images/loginSignup.png";
-// import { VisibilityEyeIcon } from "../../Assets/Svg/allsvg";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-// import { useTheme } from "../../Context/Theme/Theme-Context";
+import { useAuth } from "../../context/authContext";
+import "./SignUp.css";
 
 const Signup = () => {
-  //   const { theme } = useTheme();
-
+  const { signupHandler } = useAuth();
+  const [newUser, setNewUser] = useState({
+    fname: "",
+    lname: "",
+    email: "",
+    password: "",
+  });
+  const signUpForm = (event) => {
+    event.preventDefault();
+    signupHandler(newUser);
+  };
   return (
-    // <div className={theme === "dark" ? "dark-theme" : "light-theme"}>
     <section className="login-signup-page">
       <div className="login-signup-form signup-form">
         <h1 className="form-heading margin-bottom-2rem">SIGN UP</h1>
-        <form>
+        <form action="" onSubmit={signUpForm} className="signup">
           <label for="fname"></label>
           <input
             className="signup-fname"
@@ -21,6 +27,14 @@ const Signup = () => {
             id="fname"
             name="fname"
             placeholder="First name"
+            value={newUser.fname}
+            onChange={(e) =>
+              setNewUser({
+                ...newUser,
+                fname: e.target.value,
+              })
+            }
+            required
           />
 
           <label for="lname"></label>
@@ -30,6 +44,14 @@ const Signup = () => {
             id="fname"
             name="lname"
             placeholder="Last name"
+            value={newUser.lname}
+            onChange={(e) =>
+              setNewUser({
+                ...newUser,
+                lname: e.target.value,
+              })
+            }
+            required
           />
 
           <label for="email"></label>
@@ -39,6 +61,14 @@ const Signup = () => {
             id="email"
             name="email"
             placeholder="Email"
+            value={newUser.email}
+            onChange={(e) =>
+              setNewUser({
+                ...newUser,
+                email: e.target.value,
+              })
+            }
+            required
           />
 
           <label for="password"></label>
@@ -48,19 +78,19 @@ const Signup = () => {
             id="password"
             name="password"
             placeholder="Password"
+            value={newUser.password}
+            onChange={(e) =>
+              setNewUser({
+                ...newUser,
+                password: e.target.value,
+              })
+            }
+            required
           />
 
-          {/* {<VisibilityEyeIcon className="visibility-eye" />} */}
-
-          <label for="password"></label>
-          <input
-            className="signup-password"
-            type="password"
-            id="confirm-password"
-            name="password"
-            placeholder="Confirm Password"
-          />
-          <button className="signup-btn">Sign Up</button>
+          <div>
+            <button className="signup-btn">Sign Up</button>
+          </div>
           <p className="login-para">
             Already a user?
             <Link className="login-link" to="/login">
@@ -69,11 +99,7 @@ const Signup = () => {
           </p>
         </form>
       </div>
-      {/* <div className="signup-img-section">
-        <img className="img-form signup-img" src={loginSignup} />
-      </div> */}
     </section>
-    // </div>
   );
 };
 

@@ -77,17 +77,17 @@ const VideoProvider = ({ children }) => {
       case "ADD_TO_HISTORY":
         return {
           ...videoState,
-          liked: action.payload,
+          history: action.payload,
         };
       case "REMOVE_FROM_HISTORY":
         return {
           ...videoState,
-          liked: action.payload,
+          hsstory: action.payload,
         };
       case "CLEAR_HISTORY":
         return {
           ...videoState,
-          liked: action.payload,
+          history: action.payload,
         };
       case "NEW_PLAYLIST":
         return {

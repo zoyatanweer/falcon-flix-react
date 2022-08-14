@@ -1,8 +1,6 @@
 import axios from "axios";
 import { useAuth } from "../context/authContext";
 
-// const token = localStorage.getItem("token");
-
 const getVideos = async () => {
   try {
     const response = await axios({
@@ -29,7 +27,6 @@ const getCategories = async () => {
 
 // liked
 const getLikedVideos = async (token) => {
-  // const { token } = useAuth();
   try {
     const response = await axios.get("/api/user/likes", {
       headers: {
@@ -141,7 +138,9 @@ const postHistoryVideos = async (token, video) => {
     const response = await axios({
       method: "POST",
       url: "/api/user/history",
-      data: { video },
+      data: {
+        video,
+      },
       headers: {
         authorization: token,
       },

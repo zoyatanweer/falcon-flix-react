@@ -49,6 +49,7 @@ picture {
   --background-color: #1a202c;
   --text-color: #f8f9fa;
   --explore-background: #343a40;
+  --video-card-bg: #495057;
   --light-theme-color: #000000;
   --navigation-container-shadow: #6c757d;
   --navigation-color: #212529;
@@ -82,4 +83,90 @@ body {
   border-bottom-left-radius: 0px;
   display: flex;
   justify-content: space-between;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+/* login-signup */
+.login-signup-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.img-form {
+  height: 50rem;
+  width: 50rem;
+  object-fit: cover;
+}
+.login-signup-form {
+  background-color: var(--explore-background);
+  border-radius: 10px;
+  width: 35%;
+  text-align: center;
+}
+.form-heading {
+  color: var(--text-color);
+  font-size: 3rem;
+}
+
+.page-section {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.page-title {
+  margin-left: 1rem;
+  letter-spacing: 2px;
+}
+.no-content-section {
+  display: flex;
+  flex-direction: column;
+
+  position: absolute;
+  top: 50%;
+  left: 42%;
+}
+
+.no-content-section > p {
+  font-size: 2rem;
+}
+.no-btn {
+  background-color: #343a40;
+  background-color: #282c34;
+
+  border: 1px solid var(--primary-color);
+  color: white;
+  margin-top: 2rem;
+}
+.no-btn:hover {
+  /* background-color: #212529; */
+  background-color: #212529;
+  border: 1.5px solid var(--primary-color);
+
+  /* border: 1px solid white; */
 }
