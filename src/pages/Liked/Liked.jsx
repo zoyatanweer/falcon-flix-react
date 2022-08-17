@@ -6,6 +6,8 @@ import { Sidebar } from "../../components/Sidebar/Sidebar";
 
 import {
   LikeIcon,
+  LikedIconFilled,
+  WatchLaterIcon,
   WatchLaterClickIcon,
   PlaylistPlayIcon,
 } from "../../Assets/Svg/allsvg";
@@ -47,45 +49,65 @@ const Liked = () => {
             <div className="page-section">
               <h2 className="page-title">LIKED</h2>
             </div>
-            {liked.map((video) => {
-              return (
-                <div className="video-card">
-                  <Link to={`/explore/${video._id}`}>
-                    <div className="vid-thumbnail">
-                      <img
-                        className="vid-img"
-                        src={video.img}
-                        onClick={() => getHistory(token, video)}
-                      ></img>
+            {liked.length === 0 ? (
+              <div className="no-content-section">
+                <p>No videos in Liked.</p>
+                <Link to="/explore">
+                  <button className="btn no-btn">Explore</button>
+                </Link>
+              </div>
+            ) : (
+              liked.map((video) => {
+                return (
+                  <div className="video-card">
+                    <Link to={`/explore/${video._id}`}>
+                      <div className="vid-thumbnail">
+                        <img
+                          className="vid-img"
+                          src={video.img}
+                          onClick={() => getHistory(token, video)}
+                        ></img>
+                      </div>
+                    </Link>
+                    <div className="vid-title">
+                      <h6 className="typography-h6 title">{video.title}</h6>
+                      <p className="para-xsmall creator">{video.creator}</p>
                     </div>
-                  </Link>
-                  <div className="vid-title">
-                    <h6 className="typography-h6 title">{video.title}</h6>
-                    <p className="para-xsmall creator">{video.creator}</p>
-                  </div>
-                  <div className="vid-details">
-                    <div className="vid-services">
-                      <LikeIcon
-                        className="liked-clicked"
-                        onClick={() => likeVideoToggleHandler(token, video)}
-                        {...videoState.liked.some(
-                          (item) => item._id === video._id
-                        )}
-                      />
-                      <WatchLaterClickIcon
-                        className="watchLater-clicked"
-                        onClick={() => watchLaterToggleHandler(token, video)}
-                        {...videoState.watchLater.some(
-                          (item) => item._id === video._id
-                        )}
-                      />
-                      <PlaylistPlayIcon />
+                    <div className="vid-details">
+                      <div className="vid-services">
+                        <button
+                          onClick={() => likeVideoToggleHandler(token, video)}
+                          className="liked-clicked"
+                        >
+                          {videoState.liked.some(
+                            (item) => item._id === video._id
+                          ) ? (
+                            <LikedIconFilled />
+                          ) : (
+                            <LikeIcon />
+                          )}
+                        </button>
+
+                        <button
+                          onClick={() => watchLaterToggleHandler(token, video)}
+                          className="watchLater-clicked"
+                        >
+                          {videoState.watchLater.some(
+                            (item) => item._id === video._id
+                          ) ? (
+                            <WatchLaterIcon />
+                          ) : (
+                            <WatchLaterClickIcon />
+                          )}
+                        </button>
+                        <PlaylistPlayIcon />
+                      </div>
+                      <p className="date para-xsmall ">{video.dateUploaded}</p>
                     </div>
-                    <p className="date para-xsmall ">{video.dateUploaded}</p>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })
+            )}
           </div>
         </div>
       </div>

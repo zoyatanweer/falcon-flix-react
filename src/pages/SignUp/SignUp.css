@@ -17,6 +17,12 @@
   justify-content: center;
   align-items: center;
 }
+.signup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .form-heading {
   margin-top: 3rem;
 }
@@ -28,7 +34,8 @@
   border: 1.5px solid var(--form-input-border-color);
   border-radius: 6px;
   height: 4rem;
-  width: 28rem;
+  height: 7vh;
+  width: 25vw;
   margin: 1rem;
   padding: 8px;
 }

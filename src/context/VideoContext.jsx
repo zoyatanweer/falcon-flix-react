@@ -77,17 +77,17 @@ const VideoProvider = ({ children }) => {
       case "ADD_TO_HISTORY":
         return {
           ...videoState,
-          liked: action.payload,
+          history: action.payload,
         };
       case "REMOVE_FROM_HISTORY":
         return {
           ...videoState,
-          liked: action.payload,
+          history: action.payload,
         };
       case "CLEAR_HISTORY":
         return {
           ...videoState,
-          liked: action.payload,
+          history: action.payload,
         };
       case "NEW_PLAYLIST":
         return {
@@ -243,6 +243,7 @@ const VideoProvider = ({ children }) => {
         payload: response.history,
       });
       toast.error("Video removed from history!");
+      console.log("history cleared");
     } catch (error) {
       console.log(error);
       toast.error("You're not logged in!");

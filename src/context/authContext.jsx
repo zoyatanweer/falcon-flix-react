@@ -53,11 +53,11 @@ const AuthProvider = ({ children }) => {
         setToken(response.data.encodedToken);
         setUser(response.data.createdUser);
         navigate("/");
-        toast.success("You're logged in !");
+        toast.success("You're signed in !");
       }
     } catch (error) {
       console.log(error);
-      toast.error("Unable to sign you up!");
+      toast.error("Unable to sign you in!");
     }
   };
 
@@ -76,6 +76,7 @@ const AuthProvider = ({ children }) => {
         loginHandler,
         signupHandler,
         logoutHandler,
+        signupAPI,
         token,
         user,
         loginCredentials,
