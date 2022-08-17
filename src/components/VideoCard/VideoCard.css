@@ -1,6 +1,5 @@
 .videos-container {
   display: flex;
-
   justify-content: center;
   flex-wrap: wrap;
 }
@@ -26,7 +25,6 @@
   padding: 0 0.5rem;
 }
 .vid-details {
-  /* color: #ced4da; */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -58,7 +56,8 @@
 
 /* video services icons */
 .liked-clicked,
-.watchLater-clicked {
+.watchLater-clicked,
+.history-clicked {
   background-color: var(--video-card-bg);
   border: none;
   color: white;
@@ -70,7 +69,8 @@ on-btn {
   color: white;
 }
 .liked-clicked:hover,
-.watchLater-clicked:hover {
+.watchLater-clicked:hover,
+.history-clicked:hover {
   background-color: #42484f;
   border: none;
   color: var(--text-color);

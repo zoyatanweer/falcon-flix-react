@@ -187,7 +187,6 @@ const clearHistoryVideos = async (token) => {
 
 //playlist
 const getAllPlaylists = async (token) => {
-  // const { token } = useAuth();
   try {
     const response = await axios({
       method: "GET",

@@ -36,6 +36,13 @@ const Playlist = () => {
       : getWatchLater(token, video);
   };
 
+  const playlistCover = (playlist) => {
+    return (
+      playlist.videos.length > 0 &&
+      `https://i3.ytimg.com/vi/${playlist.videos[0]._id}/maxresdefault.jpg`
+    );
+  };
+
   return (
     <div className="main-page-content">
       <Sidebar className="item-c" />

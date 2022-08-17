@@ -82,7 +82,7 @@ const VideoProvider = ({ children }) => {
       case "REMOVE_FROM_HISTORY":
         return {
           ...videoState,
-          hsstory: action.payload,
+          history: action.payload,
         };
       case "CLEAR_HISTORY":
         return {
@@ -243,6 +243,7 @@ const VideoProvider = ({ children }) => {
         payload: response.history,
       });
       toast.error("Video removed from history!");
+      console.log("history cleared");
     } catch (error) {
       console.log(error);
       toast.error("You're not logged in!");
